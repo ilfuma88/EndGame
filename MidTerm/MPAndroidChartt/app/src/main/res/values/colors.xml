@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colMon">#009688</color>
+    <color name="colTue">#4CAF50</color>
+    <color name="colWed">#8BC34A</color>
+    <color name="colThu">#CDDC39</color>
+    <color name="colFri">#FFEB3B</color>
+    <color name="colSat">#FFC107</color>
+    <color name="colSun">#FF9800</color>
+    <color name="colBtnLineChart">#c5ff8c</color>
+    <color name="colBtnBarChart">#fff78c</color>
+    <color name="colBtnCombinedChart">#ff8e9c</color>
+    <color name="colBtnPieChart">#8cebff</color>
+</resources>
