@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PieChart">
+    tools:context=".PieChartActivity">
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChart"
@@ -25,7 +25,7 @@
         android:layout_marginBottom="8dp"
         android:background="@color/colBtnPieChart"
         android:padding="@dimen/btn_padding"
-        android:text="@string/btn_update"
+        android:text="@string/btn_pieChart_update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -37,7 +37,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="@string/et_input_value"
+        android:hint="@string/et_pieChart_input_value"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/etLabel"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="@string/et_input_label"
+        android:hint="@string/et_pieChart_input_label"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

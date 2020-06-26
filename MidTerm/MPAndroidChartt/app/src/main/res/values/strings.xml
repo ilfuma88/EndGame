@@ -3,11 +3,11 @@
     <string name="btn_pieChart"> PieChart</string>
     <string name="btn_lineChart">LineChart</string>
     <string name="btn_barChart">BarChart</string>
-    <string name="btn_combinedChart">CombinedChart</string>
+    <string name="btn_radarChart">RadarChart</string>
     <string name="tv_enterPieData">Enter new data (value, label): </string>
-    <string name="et_input_value">Value</string>
-    <string name="et_input_label">Label</string>
-    <string name="btn_update"> Update chart</string>
-    <string name="invalid_input_toast"> Invalid format</string>
+    <string name="et_pieChart_input_value">Value</string>
+    <string name="et_pieChart_input_label">Label</string>
+    <string name="btn_pieChart_update"> Update chart</string>
+    <string name="invalid_pieChart_input_toast"> Invalid format</string>
 </resources>
 

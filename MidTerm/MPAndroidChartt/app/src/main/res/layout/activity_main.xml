@@ -27,16 +27,16 @@
         android:text="@string/btn_pieChart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCombinedChart" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRadarChart" />
 
     <Button
-        android:id="@+id/btnCombinedChart"
+        android:id="@+id/btnRadarChart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="70dp"
         android:background="@color/colBtnCombinedChart"
-        android:text="@string/btn_combinedChart"
+        android:text="@string/btn_radarChart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnBarChart" />
