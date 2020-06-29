@@ -1,2 +1,2 @@
 # EndGame
-Group folder for Mobile Programming Class
+Repo for Mobile Programming Android Class
