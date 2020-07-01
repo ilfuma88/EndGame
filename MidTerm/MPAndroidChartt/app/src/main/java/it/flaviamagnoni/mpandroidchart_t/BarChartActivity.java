@@ -20,8 +20,6 @@ import java.util.ArrayList;
 public class BarChartActivity extends AppCompatActivity {
 
     BarChart barChart;
-    float barSpace = 0.08f;
-    float groupSpace = 0.44f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +75,11 @@ public class BarChartActivity extends AppCompatActivity {
 
         barChart.setDragEnabled(true);
         barChart.setVisibleXRangeMaximum(3);
+        float barSpace = 0.08f;
+        float groupSpace = 0.44f;
         barData.setBarWidth(0.10f);
-        barChart.getXAxis().setAxisMaximum(0);
-        barChart.getXAxis().setAxisMinimum(0+barChart.getBarData().getGroupWidth(groupSpace, barSpace)*7);
+        barChart.getXAxis().setAxisMinimum(0);
+        barChart.getXAxis().setAxisMaximum(0+barChart.getBarData().getGroupWidth(groupSpace, barSpace)*7);
         barChart.getAxisLeft().setAxisMinimum(0);
 
         barChart.groupBars(0, groupSpace, barSpace);
