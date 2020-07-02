@@ -15,5 +15,7 @@
     <string name="btn_create_chart">Create Chart</string>
     <string name="et_label_hint">Label</string>
     <string name="et_value_hint">Value</string>
+    <string name="et_label_data_hint">Label Data</string>
+    <string name="btn_add_label">add label</string>
 </resources>
 
