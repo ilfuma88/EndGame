@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import static it.flaviamagnoni.mpandroidchart_t.BarInfo.SomeBarInfo;
+
 public class BarchartInsertDataActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -27,37 +31,41 @@ public class BarchartInsertDataActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        barCharAdapter = new MyAdapter(myDataset);
+        barCharAdapter = new DataAdapter(SomeBarInfo());
         recyclerView.setAdapter(barCharAdapter);
     }
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-        private String label;
-        private String value;
+
+    /**
+     * la classe adapter contiee gia tutti gl oggetti da mettere nella recyclerview e si  occupa di farli comparire
+     */
+    public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> {
+        ArrayList<BarInfo> Bars;
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
         // you provide access to all the views for a data item in a view holder
-        public static class MyViewHolder extends RecyclerView.ViewHolder {
+        public class MyViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
             public TextView tvLabel;
             public TextView tvValue;
-            public MyViewHolder(TextView l, TextView v) {
-                super(v, l);
-                tvLabel = l;
-                tvValue = v;
+
+            public MyViewHolder(View itemView) {
+                super(itemView);
+                tvLabel = itemView.findViewById(R.id.tvRowBarChartDataLabel);
+                tvValue = itemView.findViewById(R.id.tvRowBarChartDataValue);
             }
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)
-        public MyAdapter(String newLabel, String newValue) {
+        public DataAdapter() {
             label = newLabel;
             value = newValue;
         }
 
         // Create new views (invoked by the layout manager)
         @Override
-        public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+        public DataAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                          int viewType) {
             // create a new view
             TextView v = (TextView) LayoutInflater.from(parent.getContext())
