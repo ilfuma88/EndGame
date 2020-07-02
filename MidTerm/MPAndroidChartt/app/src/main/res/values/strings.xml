@@ -11,5 +11,9 @@
     <string name="invalid_pieChart_input_toast"> Invalid format</string>
     <string name="btn_clear_chart">Clear chart</string>
     <string name="btn_changeCenterText">Change Center Text</string>
+    <string name="btn_add_data">Add Data</string>
+    <string name="btn_create_chart">Create Chart</string>
+    <string name="et_label_hint">Label</string>
+    <string name="et_value_hint">Value</string>
 </resources>
 
