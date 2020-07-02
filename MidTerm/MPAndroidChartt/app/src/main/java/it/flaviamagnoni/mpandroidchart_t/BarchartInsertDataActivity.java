@@ -25,6 +25,7 @@ public class BarchartInsertDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_barchart_insertdata);
 
         recyclerView = findViewById(R.id.rvInsertData);
         layoutManager = new LinearLayoutManager(this);
