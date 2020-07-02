@@ -52,8 +52,8 @@ public class RadarChartActivity extends AppCompatActivity {
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                mTextViewInsertLabel = itemView.findViewById(R.id.tvOutput);
-                mDeleteImageInserLabel = itemView.findViewById(R.id.ivDelete);
+                mTextViewInsertLabel = itemView.findViewById(R.id.tvRadarChartLabel);
+                mDeleteImageInserLabel = itemView.findViewById(R.id.ivRadarChartDelete);
             }
         }
 
