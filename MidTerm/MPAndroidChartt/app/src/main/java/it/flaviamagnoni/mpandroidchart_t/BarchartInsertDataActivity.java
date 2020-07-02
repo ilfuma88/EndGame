@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,10 +70,10 @@ public class BarchartInsertDataActivity extends AppCompatActivity {
         public DataAdapter.DataHolder onCreateViewHolder(ViewGroup parent,
                                                          int viewType) {
             // create a new view
-            TextView v = (TextView) LayoutInflater.from(parent.getContext())
+            ConstraintLayout recyclerRow = (ConstraintLayout) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.row_barchart_insert_data, parent, false);
 
-            DataHolder dh = new DataHolder(v);
+            DataHolder dh = new DataHolder(recyclerRow);
             return dh;
         }
 
