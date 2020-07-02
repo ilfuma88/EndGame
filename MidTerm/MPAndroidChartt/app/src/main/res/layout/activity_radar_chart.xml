@@ -26,7 +26,7 @@
         android:ems="10"
         android:hint="@string/et_label_hint"
         android:inputType="text"
-        android:maxLines="@dimen/et_max_lines"
+        android:maxLines="1"
         app:layout_constraintEnd_toStartOf="@+id/btnRadarChartAddLabel"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"

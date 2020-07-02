@@ -48,7 +48,7 @@ public class RadarChartActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.btnRadarChartAddLabel:
-                    mRadarChartRows.add(new RadarChartRow(etRadarChartLabel.getText().toString(),0));
+                    mRadarChartRows.add(new RadarChartRow(etRadarChartLabel.getText().toString(),R.drawable.ic_delete));
                     mRadarChartAdapter.notifyDataSetChanged();
                     etRadarChartLabel.setText("");
                     break;
@@ -75,12 +75,12 @@ public class RadarChartActivity extends AppCompatActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public TextView mTextViewInsertLabel;
-            public ImageView mDeleteImageInserLabel;
+            public ImageView mDeleteImageInsertLabel;
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 mTextViewInsertLabel = itemView.findViewById(R.id.tvRadarChartLabel);
-                mDeleteImageInserLabel = itemView.findViewById(R.id.ivRadarChartDelete);
+                mDeleteImageInsertLabel = itemView.findViewById(R.id.ivRadarChartDelete);
             }
         }
 
@@ -96,6 +96,7 @@ public class RadarChartActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             RadarChartRow currentIteam = mRowItem.get(position);
             holder.mTextViewInsertLabel.setText(currentIteam.getLabel());
+            holder.mDeleteImageInsertLabel.setImageResource(currentIteam.getValue());
         }
 
         @Override
