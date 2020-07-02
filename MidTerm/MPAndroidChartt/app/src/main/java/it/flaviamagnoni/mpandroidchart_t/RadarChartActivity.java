@@ -39,36 +39,33 @@ public class RadarChartActivity extends AppCompatActivity {
         mRecyclerViewRadarChart.setAdapter(mRadarChartAdapter);
     }
 
-    public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
+    public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         private ArrayList<RadarChartRow> mRowItem;
 
-        public Adapter(ArrayList<RadarChartRow> rowItem){
+        public Adapter(ArrayList<RadarChartRow> rowItem) {
             mRowItem = rowItem;
         }
 
-        public static class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mTextView;
-            public ImageView mDeleteImage;
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public TextView mTextViewInsertLabel;
+            public ImageView mDeleteImageInserLabel;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                mTextView = itemView.findViewById(R.id.tvOutput);
-                mDeleteImage = itemView.findViewById(R.id.ivDelete);
+                mTextViewInsertLabel = itemView.findViewById(R.id.tvOutput);
+                mDeleteImageInserLabel = itemView.findViewById(R.id.ivDelete);
+            }
         }
 
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_row_iteam, parent, false);
-            return viewHolder;
+            return null;
         }
 
         @Override
-        public void onBindViewHolder (ViewHolder holder, int position) {
-            mRowItem currentItem = mRowItem.get(position);
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-            holder.mTextView.setText(currentItem.getTextResource());
-            holder.mDeleteImage.setImageResource(currentItem.getImageResource());
         }
 
         @Override
@@ -76,5 +73,4 @@ public class RadarChartActivity extends AppCompatActivity {
             return mRowItem.size();
         }
     }
-
 }
