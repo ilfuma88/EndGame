@@ -9,5 +9,7 @@
     <string name="et_pieChart_input_label">Label</string>
     <string name="btn_pieChart_update"> Update chart</string>
     <string name="invalid_pieChart_input_toast"> Invalid format</string>
+    <string name="btn_clear_chart">Clear chart</string>
+    <string name="btn_changeCenterText">Change Center Text</string>
 </resources>
 
