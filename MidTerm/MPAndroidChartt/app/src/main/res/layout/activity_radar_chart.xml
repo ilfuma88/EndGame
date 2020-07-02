@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etLabel"
+        android:id="@+id/etRadarChartLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -27,13 +27,13 @@
         android:hint="@string/et_label_hint"
         android:inputType="text"
         android:maxLines="@dimen/et_max_lines"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddLabel"
+        app:layout_constraintEnd_toStartOf="@+id/btnRadarChartAddLabel"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvInsertRadarChart" />
 
     <Button
-        android:id="@+id/btnAddLabel"
+        android:id="@+id/btnRadarChartAddLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rvInsertRadarChart" />
 
     <Button
-        android:id="@+id/btnCreate"
+        android:id="@+id/btnRadarChartCreate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -53,5 +53,5 @@
         android:textSize="@dimen/txt_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/etRadarChartLabel" />
 </androidx.constraintlayout.widget.ConstraintLayout>

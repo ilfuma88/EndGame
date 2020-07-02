@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +29,31 @@ public class RadarChartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_radar_chart);
         mRadarChartRows = new ArrayList<>();
         buldView();
+        new Holder();
+    }
+
+    public class Holder implements View.OnClickListener {
+        private EditText etRadarChartLabel;
+        private Button btnRadarChartAddLabel, btnRadarChartCreate;
+        Holder(){
+            etRadarChartLabel = findViewById(R.id.etRadarChartLabel);
+            btnRadarChartAddLabel = findViewById(R.id.btnRadarChartAddLabel);
+            btnRadarChartCreate = findViewById(R.id.btnRadarChartCreate);
+
+            btnRadarChartAddLabel.setOnClickListener(this);
+            btnRadarChartCreate.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.btnRadarChartAddLabel:
+                    mRadarChartRows.add(new RadarChartRow(etRadarChartLabel.getText().toString(),0));
+                    mRadarChartAdapter.notifyDataSetChanged();
+                    etRadarChartLabel.setText("");
+                    break;
+            }
+        }
     }
 
     public void buldView(){
