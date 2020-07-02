@@ -60,12 +60,15 @@ public class RadarChartActivity extends AppCompatActivity {
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return null;
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_radarchart_insert_label, parent, false);
+            ViewHolder viewHolder = new ViewHolder(view);
+            return viewHolder;
         }
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+            RadarChartRow currentIteam = mRowItem.get(position);
+            holder.mTextViewInsertLabel.setText(currentIteam.getLabel());
         }
 
         @Override
