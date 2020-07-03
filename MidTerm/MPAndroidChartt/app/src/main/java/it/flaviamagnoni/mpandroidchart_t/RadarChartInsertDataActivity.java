@@ -37,18 +37,18 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
         mRecyclerViewDataRadarChart = findViewById(R.id.rvRadarChartInsertData);
         mRecyclerViewDataRadarChart.setHasFixedSize(true);
         mRadarChartLayoutDataManager = new LinearLayoutManager(this);
-        mRadarChartDataAdapter = new RadarChartActivity.Adapter(mLabel);
+        mRadarChartDataAdapter = new RadarChartActivity.Adapter(mLabel, (RadarChartActivity.Adapter.OnItemClickListener) this);
 
         mRecyclerViewDataRadarChart.setLayoutManager(mRadarChartLayoutDataManager);
         mRecyclerViewDataRadarChart.setAdapter(mRadarChartDataAdapter);
     }
 
 
-    public class Adapter extends RecyclerView.Adapter<RadarChartActivity.Adapter.ViewHolder> {
+    private class MyAdapter extends RecyclerView.Adapter<RadarChartActivity.Adapter.ViewHolder> {
         private ArrayList<String> mRowItem;
 
 
-        public Adapter(ArrayList<String> rowItem) {
+        public MyAdapter(ArrayList<String> rowItem) {
             mRowItem = rowItem;
         }
 
@@ -65,7 +65,7 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
         @Override
         public RadarChartActivity.Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_radarchart_insert_data, parent, false);
-            RadarChartActivity.Adapter.ViewHolder viewHolder = new RadarChartActivity.Adapter.ViewHolder(view);
+            RadarChartActivity.Adapter.ViewHolder viewHolder = new RadarChartActivity.Adapter.ViewHolder(view, (RadarChartActivity.Adapter.OnItemClickListener) this);
             return viewHolder;
         }
 

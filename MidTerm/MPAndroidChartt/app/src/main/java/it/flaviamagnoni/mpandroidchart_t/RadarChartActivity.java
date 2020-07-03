@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,9 +25,6 @@ import com.github.mikephil.charting.charts.RadarChart;
 import java.util.ArrayList;
 
 public class RadarChartActivity extends AppCompatActivity {
-    private RecyclerView mRecyclerViewRadarChart;
-    private Adapter mRadarChartAdapter;
-    private RecyclerView.LayoutManager mRadarChartLayoutManager;
 
     private ArrayList<String> mRadarChartLabelRows;
 
@@ -34,15 +33,26 @@ public class RadarChartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radar_chart);
         mRadarChartLabelRows = new ArrayList<>();
-        buldView();
         new Holder();
     }
 
-    public class Holder implements View.OnClickListener {
+    public class Holder implements View.OnClickListener, RadarChartActivity.Adapter.OnItemClickListener{
         private EditText etRadarChartLabel;
         private Button btnRadarChartAddLabel, btnRadarChartAddData;
 
+        private RecyclerView mRecyclerViewRadarChart;
+        private Adapter mRadarChartAdapter;
+        private RecyclerView.LayoutManager mRadarChartLayoutManager;
+
         Holder() {
+            mRecyclerViewRadarChart = findViewById(R.id.rvInsertRadarChart);
+            mRecyclerViewRadarChart.setHasFixedSize(true);
+            mRadarChartLayoutManager = new LinearLayoutManager(RadarChartActivity.this);
+            mRadarChartAdapter = new Adapter(mRadarChartLabelRows, this);
+
+            mRecyclerViewRadarChart.setLayoutManager(mRadarChartLayoutManager);
+            mRecyclerViewRadarChart.setAdapter(mRadarChartAdapter);
+
             etRadarChartLabel = findViewById(R.id.etRadarChartLabel);
             btnRadarChartAddLabel = findViewById(R.id.btnRadarChartAddLabel);
             btnRadarChartAddData = findViewById(R.id.btnRadarChartAddData);
@@ -77,40 +87,53 @@ public class RadarChartActivity extends AppCompatActivity {
                     startActivity(intent);
             }
         }
-    }
 
-    public void buldView(){
-        mRecyclerViewRadarChart = findViewById(R.id.rvInsertRadarChart);
-        mRecyclerViewRadarChart.setHasFixedSize(true);
-        mRadarChartLayoutManager = new LinearLayoutManager(this);
-        mRadarChartAdapter = new Adapter(mRadarChartLabelRows);
-
-        mRecyclerViewRadarChart.setLayoutManager(mRadarChartLayoutManager);
-        mRecyclerViewRadarChart.setAdapter(mRadarChartAdapter);
+        @Override
+        public void onDeleteItemClick(int position) {
+            mRadarChartLabelRows.remove(position);
+            mRadarChartAdapter.notifyItemRemoved(position);
+        }
     }
 
     public static class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         private ArrayList<String> mRowItem;
+        private OnItemClickListener mListener;
 
-
-        public Adapter(ArrayList<String> rowItem) {
+        public Adapter(ArrayList<String> rowItem, OnItemClickListener onItemClickListener) {
             mRowItem = rowItem;
+            mListener = onItemClickListener;
         }
 
-        public static class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView mTextViewInsertLabel;
 
-            public ViewHolder(View itemView) {
+        public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+            public TextView mTextViewInsertLabel;
+            public ImageView mImegeViewDelete;
+
+            public OnItemClickListener mListener;
+
+            public ViewHolder(View itemView, OnItemClickListener listener) {
                 super(itemView);
                 mTextViewInsertLabel = itemView.findViewById(R.id.tvRadarChartLabel);
+                mImegeViewDelete = itemView.findViewById(R.id.ivRadarChartDelete);
+                mListener = listener;
+
+                mImegeViewDelete.setOnClickListener(this);
             }
+
+            @Override
+            public void onClick(View view) {
+                mListener.onDeleteItemClick(getAdapterPosition());
+            }
+        }
+        public interface OnItemClickListener{
+            void onDeleteItemClick (int  position);
         }
 
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_radarchart_insert_label, parent, false);
-            ViewHolder viewHolder = new ViewHolder(view);
+            ViewHolder viewHolder = new ViewHolder(view, mListener);
             return viewHolder;
         }
 
