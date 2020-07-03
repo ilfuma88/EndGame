@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,11 +19,16 @@ import java.util.ArrayList;
 
 import static it.flaviamagnoni.mpandroidchart_t.BarInfo.SomeBarInfo;
 
-public class BarchartInsertDataActivity extends AppCompatActivity {
+public class BarchartInsertDataActivity extends AppCompatActivity
+                                        implements View.OnClickListener {
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter barCharAdapter;
+    private RecyclerView.Adapter barChartAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private Button btnAddData;
+    private ArrayList <BarInfo> barsData = new ArrayList<>();
+    private EditText etBarDataLabel;
+    private EditText etBarDataValue;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,10 +40,23 @@ public class BarchartInsertDataActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        barCharAdapter = new DataAdapter(SomeBarInfo());
-        recyclerView.setAdapter(barCharAdapter);
+        barChartAdapter = new DataAdapter(barsData);
+        recyclerView.setAdapter(barChartAdapter);
+        btnAddData = findViewById(R.id.btnAddData);
+        btnAddData.setOnClickListener(this);
+        etBarDataLabel = findViewById(R.id.etBarDataLabel);
+        etBarDataValue = findViewById(R.id.etBarDataValue);
     }
 
+    @Override
+    public void onClick(View v) {
+        barsData.add(new BarInfo(etBarDataLabel.getText().toString(),
+                                 etBarDataValue.getText().toString()));
+        barChartAdapter.notifyDataSetChanged();
+        etBarDataLabel.setText("");
+        etBarDataValue.setText("");
+
+    }
 
     /**
      * la classe adapter contiee gia tutti gl oggetti da mettere nella recyclerview e si  occupa di farli comparire
@@ -44,6 +64,10 @@ public class BarchartInsertDataActivity extends AppCompatActivity {
     public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataHolder> {
         ArrayList<BarInfo> bars;
 
+        // Provide a suitable constructor (depends on the kind of dataset)
+        public DataAdapter(ArrayList<BarInfo> newBars) {
+            this.bars = newBars;
+        }
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
         // you provide access to all the views for a data item in a view holder
@@ -57,12 +81,6 @@ public class BarchartInsertDataActivity extends AppCompatActivity {
                 tvLabel = itemView.findViewById(R.id.tvRowBarChartDataLabel);
                 tvValue = itemView.findViewById(R.id.tvRowBarChartDataValue);
             }
-        }
-
-        // Provide a suitable constructor (depends on the kind of dataset)
-        public DataAdapter(ArrayList<BarInfo> barInfos) {
-            this.bars = barInfos;
-
         }
 
         // Create new views (invoked by the layout manager)
@@ -90,6 +108,5 @@ public class BarchartInsertDataActivity extends AppCompatActivity {
             return bars.size();
         }
     }
-
 
 }

@@ -18,14 +18,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnAddData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/btn_add_data"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvInsertData" />
+        app:layout_constraintTop_toBottomOf="@+id/rvInsertData"
+        app:layout_constraintVertical_bias="0.015" />
 
     <Button
         android:id="@+id/btnCreate"
@@ -38,10 +40,10 @@
         android:textSize="@dimen/txt_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etValue" />
+        app:layout_constraintTop_toBottomOf="@+id/etBarDataValue" />
 
     <EditText
-        android:id="@+id/etLabel"
+        android:id="@+id/etBarDataLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -50,21 +52,24 @@
         android:ems="10"
         android:hint="@string/et_label_hint"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/etValue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/etBarDataValue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvInsertData" />
+        app:layout_constraintTop_toBottomOf="@+id/rvInsertData"
+        app:layout_constraintVertical_bias="0.015" />
 
     <EditText
-        android:id="@+id/etValue"
+        android:id="@+id/etBarDataValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="@string/et_value_hint"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
-        app:layout_constraintStart_toEndOf="@+id/etLabel"
-        app:layout_constraintTop_toBottomOf="@+id/rvInsertData" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddData"
+        app:layout_constraintStart_toEndOf="@+id/etBarDataLabel"
+        app:layout_constraintTop_toBottomOf="@+id/rvInsertData"
+        app:layout_constraintVertical_bias="0.015" />
 </androidx.constraintlayout.widget.ConstraintLayout>
