@@ -1,8 +1,11 @@
 package it.flaviamagnoni.mpandroidchart_t;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class BarInfo {
+public class BarInfo implements Parcelable {
     String label;
     String value;
 
@@ -10,6 +13,35 @@ public class BarInfo {
         this.label = label;
         this.value = value;
     }
+
+    public static final Creator<BarInfo> CREATOR = new Creator<BarInfo>() {
+        @Override
+        public BarInfo createFromParcel(Parcel in) {
+            return new BarInfo(in);
+        }
+
+        @Override
+        public BarInfo[] newArray(int size) {
+            return new BarInfo[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.label);
+        dest.writeString(this.value);
+    }
+
+    public BarInfo(Parcel in){
+        this.label = in.readString();
+        this.value = in.readString();
+    }
+
     public static ArrayList<BarInfo> SomeBarInfo(){
         ArrayList<BarInfo> barInfos = new ArrayList<>();
         barInfos.add(new BarInfo("monday","67"));
@@ -21,5 +53,4 @@ public class BarInfo {
         barInfos.add(new BarInfo("sunday","10"));
         return barInfos;
     }
-
 }

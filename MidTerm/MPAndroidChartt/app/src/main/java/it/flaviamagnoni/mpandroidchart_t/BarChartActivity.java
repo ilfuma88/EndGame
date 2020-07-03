@@ -5,6 +5,7 @@ package it.flaviamagnoni.mpandroidchart_t;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -25,8 +26,11 @@ public class BarChartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar_chart);
-
         barChart = findViewById(R.id.barChart);
+
+        Intent intent = getIntent();
+        BarInfo bar = intent.getParcelableExtra("barsData0");
+        System.out.println(bar.label);
         BarDataSet barDataSet1;
         BarDataSet barDataSet2;
         BarData barData;

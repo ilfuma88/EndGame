@@ -1,5 +1,6 @@
 package it.flaviamagnoni.mpandroidchart_t;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class BarchartInsertDataActivity extends AppCompatActivity
     private RecyclerView.Adapter barChartAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private Button btnAddData;
+    private Button btnCreateChart;
     private ArrayList <BarInfo> barsData = new ArrayList<>();
     private EditText etBarDataLabel;
     private EditText etBarDataValue;
@@ -44,6 +46,8 @@ public class BarchartInsertDataActivity extends AppCompatActivity
         recyclerView.setAdapter(barChartAdapter);
         btnAddData = findViewById(R.id.btnAddData);
         btnAddData.setOnClickListener(this);
+        btnCreateChart = findViewById(R.id.btnBarchartInserDataCreate);
+        btnCreateChart.setOnClickListener(this);
         etBarDataLabel = findViewById(R.id.etBarDataLabel);
         etBarDataValue = findViewById(R.id.etBarDataValue);
     }
@@ -59,7 +63,14 @@ public class BarchartInsertDataActivity extends AppCompatActivity
                 etBarDataValue.setText("");
                 break;
             case R.id.btnBarchartInserDataCreate:
-
+                Intent intent = new Intent (BarchartInsertDataActivity.this, BarChartActivity.class);
+                for (int i=0; i < barsData.size(); i++) {
+                    String key = "barsData";
+                    key = key+String.valueOf(i);
+                    intent.putExtra(key, barsData.get(i));
+                }
+                BarchartInsertDataActivity.this.startActivity(intent);
+                break;
         }
     }
 
