@@ -18,7 +18,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import java.util.ArrayList;
 
 public class BarChartActivity extends AppCompatActivity {
-
+    private static int singleBarChart = 1; //permette di scegliere che tipo di bar chart usare (1 single) (0 grouped)
     BarChart barChart;
 
     @Override
@@ -27,63 +27,69 @@ public class BarChartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bar_chart);
 
         barChart = findViewById(R.id.barChart);
-        /**
-         * example of bar chart with two datasets
-         */
-        /**
-        BarDataSet barDataSet1 = new BarDataSet(dataValue1(), "Dataset 1");
-        BarDataSet barDataSet2 = new BarData(dataValue2(), "Dataset 2");
-        barDataSet1.setColor(Color.DKGRAY);
-        barDataSet2.setColor(Color.CYAN);
-        BarData barData = new BarData();
-        barData.addDataSet(barDataSet1);
-        barData.addDataSet(barDataSet2);
-        */
+        BarDataSet barDataSet1;
+        BarDataSet barDataSet2;
+        BarData barData;
+        switch(singleBarChart) {
+            /**
+             * example of bar chart with two datasets
+             */
+            case 1:
+                barDataSet1 = new BarDataSet(dataValue1(), "Dataset 1");
+                barDataSet2 = new BarDataSet(dataValue2(), "Dataset 2");
+                barDataSet1.setColor(Color.DKGRAY);
+                barDataSet2.setColor(Color.CYAN);
+                barData = new BarData();
+                barData.addDataSet(barDataSet1);
+                barData.addDataSet(barDataSet2);
+                break;
 
-        /**
-         * example of grouped barcharts
-         */
-        BarDataSet barDataSet1 = new BarDataSet(barEntries1(), "DataSet 1");
-        BarDataSet barDataSet2 = new BarDataSet(barEntries2(), "DataSet 2");
-        BarDataSet barDataSet3 = new BarDataSet(barEntries3(), "DataSet 3");
-        BarDataSet barDataSet4 = new BarDataSet(barEntries4(), "DataSet 4");
-        BarDataSet barDataSet5 = new BarDataSet(barEntries5(), "DataSet 5");
-        BarDataSet barDataSet6 = new BarDataSet(barEntries6(), "DataSet 6");
+            /**
+             * example of grouped barcharts
+             */
+            case 0:
+                barDataSet1 = new BarDataSet(barEntries1(), "DataSet 1");
+                barDataSet2 = new BarDataSet(barEntries2(), "DataSet 2");
+                BarDataSet barDataSet3 = new BarDataSet(barEntries3(), "DataSet 3");
+                BarDataSet barDataSet4 = new BarDataSet(barEntries4(), "DataSet 4");
+                BarDataSet barDataSet5 = new BarDataSet(barEntries5(), "DataSet 5");
+                BarDataSet barDataSet6 = new BarDataSet(barEntries6(), "DataSet 6");
 
-        barDataSet1.setColor(Color.BLACK);
-        barDataSet2.setColor(Color.BLUE);
-        barDataSet3.setColor(Color.GRAY);
-        barDataSet4.setColor(Color.GREEN);
-        barDataSet5.setColor(Color.RED);
-        barDataSet6.setColor(Color.YELLOW);
+                barDataSet1.setColor(Color.BLACK);
+                barDataSet2.setColor(Color.BLUE);
+                barDataSet3.setColor(Color.GRAY);
+                barDataSet4.setColor(Color.GREEN);
+                barDataSet5.setColor(Color.RED);
+                barDataSet6.setColor(Color.YELLOW);
 
-        BarData barData = new BarData();
-        barData.addDataSet(barDataSet1);
-        barData.addDataSet(barDataSet2);
-        barData.addDataSet(barDataSet3);
-        barData.addDataSet(barDataSet4);
+                barData = new BarData();
+                barData.addDataSet(barDataSet1);
+                barData.addDataSet(barDataSet2);
+                barData.addDataSet(barDataSet3);
+                barData.addDataSet(barDataSet4);
 
-        barChart.setData(barData);
+                barChart.setData(barData);
 
-        String[] days = new String[]{"Monday", "Tuesday", "Wednesday",  "Thursday", "Friday", "Saturday", "Sunday"};
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(days));
-        xAxis.setCenterAxisLabels(true);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGranularity(1);
-        xAxis.setGranularityEnabled(true);
+                String[] days = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+                XAxis xAxis = barChart.getXAxis();
+                xAxis.setValueFormatter(new IndexAxisValueFormatter(days));
+                xAxis.setCenterAxisLabels(true);
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                xAxis.setGranularity(1);
+                xAxis.setGranularityEnabled(true);
 
-        barChart.setDragEnabled(true);
-        barChart.setVisibleXRangeMaximum(3);
-        float barSpace = 0.08f;
-        float groupSpace = 0.44f;
-        barData.setBarWidth(0.10f);
-        barChart.getXAxis().setAxisMinimum(0);
-        barChart.getXAxis().setAxisMaximum(0+barChart.getBarData().getGroupWidth(groupSpace, barSpace)*7);
-        barChart.getAxisLeft().setAxisMinimum(0);
+                barChart.setDragEnabled(true);
+                barChart.setVisibleXRangeMaximum(3);
+                float barSpace = 0.08f;
+                float groupSpace = 0.44f;
+                barData.setBarWidth(0.10f);
+                barChart.getXAxis().setAxisMinimum(0);
+                barChart.getXAxis().setAxisMaximum(0 + barChart.getBarData().getGroupWidth(groupSpace, barSpace) * 7);
+                barChart.getAxisLeft().setAxisMinimum(0);
 
-        barChart.groupBars(0, groupSpace, barSpace);
-
+                barChart.groupBars(0, groupSpace, barSpace);
+                break;
+        }
         barChart.invalidate();
     }
 

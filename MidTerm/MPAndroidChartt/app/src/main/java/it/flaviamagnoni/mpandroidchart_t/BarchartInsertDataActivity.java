@@ -50,16 +50,21 @@ public class BarchartInsertDataActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        barsData.add(new BarInfo(etBarDataLabel.getText().toString(),
-                                 etBarDataValue.getText().toString()));
-        barChartAdapter.notifyDataSetChanged();
-        etBarDataLabel.setText("");
-        etBarDataValue.setText("");
+        switch (v.getId()) {
+            case R.id.btnAddData:
+                barsData.add(new BarInfo(etBarDataLabel.getText().toString(),
+                        etBarDataValue.getText().toString()));
+                barChartAdapter.notifyDataSetChanged();
+                etBarDataLabel.setText("");
+                etBarDataValue.setText("");
+                break;
+            case R.id.btnBarchartInserDataCreate:
 
+        }
     }
 
     /**
-     * la classe adapter contiee gia tutti gl oggetti da mettere nella recyclerview e si  occupa di farli comparire
+     * la classe adapter contiene gia tutti gl oggetti da mettere nella recyclerview e si  occupa di farli comparire
      */
     public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataHolder> {
         ArrayList<BarInfo> bars;
