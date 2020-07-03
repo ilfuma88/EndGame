@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             if (v.getId() == R.id.btnBarChart)
                 startActivity(new Intent(MainActivity.this, BarchartInsertDataActivity.class));
             if (v.getId() == R.id.btnRadarChart)
-                startActivity(new Intent(MainActivity.this, RadarChartActivity.class));
+                startActivity(new Intent(MainActivity.this, RadarChartInsertLabelActivity.class));
             if (v.getId()== R.id.btnPieChart){
                 startActivity(new Intent(MainActivity.this, PieChartActivity.class));
             }

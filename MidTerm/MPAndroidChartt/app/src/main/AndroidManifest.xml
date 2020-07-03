@@ -12,7 +12,6 @@
         <activity android:name=".BarChartActivity"></activity>
         <activity android:name=".RadarChartInsertDataActivity"/>
         <activity android:name=".BarchartInsertDataActivity"/>
-        <activity android:name=".RadarChartActivity" />
         <activity android:name=".LineChartActivity" />
         <activity android:name=".PieChartActivity" />
         <activity android:name=".MainActivity">
@@ -22,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RadarChartInsertLabelActivity" />
     </application>
 
 </manifest>
