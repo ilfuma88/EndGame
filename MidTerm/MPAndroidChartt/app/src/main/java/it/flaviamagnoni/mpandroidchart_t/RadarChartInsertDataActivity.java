@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,67 +18,78 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RadarChartInsertDataActivity extends AppCompatActivity {
-    private RecyclerView mRecyclerViewDataRadarChart;
-    private RadarChartActivity.Adapter mRadarChartDataAdapter;
-    private RecyclerView.LayoutManager mRadarChartLayoutDataManager;
 
-    private ArrayList<Integer> mLabelData;
-    private ArrayList<String> mLabel;
+    private Intent intent;
+    private ArrayList<String> label;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radar_chart_insert_data);
-        mLabelData = new ArrayList<>();
-        mLabel = new ArrayList<>();
-        Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("bundle");
-        mLabel.addAll(bundle.getStringArrayList("label"));
+        label = new ArrayList<>();
+        intent = getIntent();
+        label.addAll(intent.getStringArrayListExtra("label"));
+        new Holder();
     }
-    public void buldView(){
-        mRecyclerViewDataRadarChart = findViewById(R.id.rvRadarChartInsertData);
-        mRecyclerViewDataRadarChart.setHasFixedSize(true);
-        mRadarChartLayoutDataManager = new LinearLayoutManager(this);
-        mRadarChartDataAdapter = new RadarChartActivity.Adapter(mLabel, (RadarChartActivity.Adapter.OnItemClickListener) this);
+    public class Holder{
+        private EditText etRadarChartDataLabel;
+        private Button btnRadarChartCreate;
 
-        mRecyclerViewDataRadarChart.setLayoutManager(mRadarChartLayoutDataManager);
-        mRecyclerViewDataRadarChart.setAdapter(mRadarChartDataAdapter);
+        private RecyclerView rvRadarChartInsertData;
+        private RadarChartInsertDataActivity.Adapter mRadarChartAdapter;
+        private RecyclerView.LayoutManager mRadarChartLayoutManager;
+        Holder(){
+            rvRadarChartInsertData = findViewById(R.id.rvRadarChartInsertData);
+            rvRadarChartInsertData.setHasFixedSize(true);
+            mRadarChartLayoutManager = new LinearLayoutManager(RadarChartInsertDataActivity.this);
+            mRadarChartAdapter = new RadarChartInsertDataActivity.Adapter(label);
+
+            rvRadarChartInsertData.setLayoutManager(mRadarChartLayoutManager);
+            rvRadarChartInsertData.setAdapter(mRadarChartAdapter);
+
+            etRadarChartDataLabel = findViewById(R.id.etRadarChartLabel);
+            btnRadarChartCreate = findViewById(R.id.btnRadarChartCreate);
+        }
     }
 
-
-    private class MyAdapter extends RecyclerView.Adapter<RadarChartActivity.Adapter.ViewHolder> {
+    public static class Adapter extends RecyclerView.Adapter<RadarChartInsertDataActivity.Adapter.ViewHolder> {
         private ArrayList<String> mRowItem;
 
-
-        public MyAdapter(ArrayList<String> rowItem) {
+        public Adapter(ArrayList<String> rowItem) {
             mRowItem = rowItem;
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView mTextViewInsertLabel;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-                mTextViewInsertLabel = itemView.findViewById(R.id.tvRadarChartLabel);
-            }
         }
 
         @NonNull
         @Override
-        public RadarChartActivity.Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_radarchart_insert_data, parent, false);
-            RadarChartActivity.Adapter.ViewHolder viewHolder = new RadarChartActivity.Adapter.ViewHolder(view, (RadarChartActivity.Adapter.OnItemClickListener) this);
+            RadarChartInsertDataActivity.Adapter.ViewHolder viewHolder = new RadarChartInsertDataActivity.Adapter.ViewHolder(view);
             return viewHolder;
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RadarChartActivity.Adapter.ViewHolder holder, int position) {
-            holder.mTextViewInsertLabel.setText(mRowItem.get(position));
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            holder.tvRadarChartDataLabel.setText(mRowItem.get(position));
         }
 
         @Override
         public int getItemCount() {
             return mRowItem.size();
+
+        }
+
+
+        public static class ViewHolder extends RecyclerView.ViewHolder {
+            public TextView tvRadarChartDataLabel;
+            public EditText etRadarChartDataLabel;
+
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                tvRadarChartDataLabel = itemView.findViewById(R.id.tvRadarChartDataLabel);
+                etRadarChartDataLabel = itemView.findViewById(R.id.etRadarChartDataLabel);
+            }
         }
     }
 }
+
