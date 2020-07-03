@@ -17,5 +17,6 @@
     <string name="et_value_hint">Value</string>
     <string name="et_label_data_hint">Label Data</string>
     <string name="btn_add_label">add label</string>
+
 </resources>
 
