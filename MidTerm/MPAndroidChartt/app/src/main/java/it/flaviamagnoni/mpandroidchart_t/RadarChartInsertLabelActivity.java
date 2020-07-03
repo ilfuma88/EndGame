@@ -31,7 +31,7 @@ public class RadarChartInsertLabelActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_radar_chart);
+        setContentView(R.layout.activity_radar_chart_insert_label);
         mRadarChartLabelRows = new ArrayList<>();
         new Holder();
     }
