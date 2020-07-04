@@ -63,18 +63,20 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
+            String labelData = etRadarChartDataLabel.getText().toString();
+            System.out.println(labelData);
             switch (view.getId()){
                 case R.id.btnAddNewDataRadarChart:
-                    if (etRadarChartDataLabel.getText().toString() != null){
-                        InserBundle(etRadarChartDataLabel.getText().toString());
+                    if (labelData != null){
+                        InserBundle(labelData);
                         Intent intent = new Intent(RadarChartInsertDataActivity.this, RadarChartInsertDataActivity.class);
                         intent.putExtra("bundle", bundle);
                         startActivity(intent);
                     }
                     break;
                 case R.id.btnRadarChartCreate:
-                    if (etRadarChartDataLabel.getText().toString() != null){
-                        InserBundle(etRadarChartDataLabel.getText().toString());
+                    if (labelData != null){
+                        InserBundle(labelData);
                         Intent intent = new Intent(RadarChartInsertDataActivity.this, RadarChartActivity.class);
                         intent.putExtra("bundle", bundle);
                         startActivity(intent);
@@ -84,7 +86,7 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
         }
     }
 
-    public void InserBundle(String etRadarChartDataLabel){
+    public void InserBundle(String labelData){
         int i = bundle.getInt("i");
         bundle.remove("i");
         ArrayList<Integer> data = new ArrayList<>();
@@ -95,8 +97,8 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
         String string = "dataSet_" + String.valueOf(i);
         bundle.putIntegerArrayList(string, data);
         String string1 = "labelDataSet_" + String.valueOf(i);
-        bundle.putString(string1, etRadarChartDataLabel);
-        bundle.putInt("i", i++);
+        bundle.putString(string1, labelData);
+        bundle.putInt("i", i+=1);
     }
 
     public static class Adapter extends RecyclerView.Adapter<RadarChartInsertDataActivity.Adapter.ViewHolder> {
@@ -119,7 +121,7 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
             final RadarChartRow currentItem = mRowItem.get(position);
 
             holder.tvRadarChartDataLabel.setText(currentItem.getLabel());
-            holder.etRadarChartDataLabel.addTextChangedListener(new TextWatcher() {
+            holder.etRadarChartData.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -128,7 +130,6 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     currentItem.setValue(Integer.valueOf(charSequence.toString()));
-                    System.out.println(currentItem.getValue());
                 }
 
                 @Override
@@ -147,13 +148,13 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public TextView tvRadarChartDataLabel;
-            public EditText etRadarChartDataLabel;
+            public EditText etRadarChartData;
 
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 tvRadarChartDataLabel = itemView.findViewById(R.id.tvRadarChartDataLabel);
-                etRadarChartDataLabel = itemView.findViewById(R.id.etRadarChartDataLabel);
+                etRadarChartData = itemView.findViewById(R.id.etRadarChartData);
             }
         }
     }

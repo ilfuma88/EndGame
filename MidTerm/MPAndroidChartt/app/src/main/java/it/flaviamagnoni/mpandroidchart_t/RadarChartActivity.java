@@ -28,20 +28,16 @@ public class RadarChartActivity extends AppCompatActivity {
         private RadarChart radarChart;
         private RadarDataSet dataSet;
         private RadarData data;
-        private ArrayList<RadarEntry> dataVals;
+        private ArrayList radarEntries;
         private Bundle bundle;
         Holder(){
             radarChart = findViewById(R.id.radarChart);
             bundle = new Bundle(intent.getBundleExtra("bundle"));
             data = new RadarData();
             for(int i = 0; i<bundle.getInt("i"); i++){
-                dataVals = new ArrayList<>();
-                String getDataSet = "dataSet_" + String.valueOf(i);
-                for (int j = 0; j<bundle.getStringArrayList("label").size(); j++){
-                    dataVals.add(new RadarEntry((int)bundle.getIntegerArrayList(getDataSet).get(j)));
-                }
+                getEntries(i);
                 String getLabelDataSet = "labelDataSet_" + String.valueOf(i);
-                dataSet = new RadarDataSet(dataVals,bundle.getString(getLabelDataSet));
+                dataSet = new RadarDataSet(radarEntries,bundle.getString(getLabelDataSet));
                 dataSet.setColor(Color.BLACK);
                 data.addDataSet(dataSet);
             }
@@ -49,6 +45,14 @@ public class RadarChartActivity extends AppCompatActivity {
             xAxis.setValueFormatter(new IndexAxisValueFormatter(bundle.getStringArrayList("label")));
             radarChart.setData(data);
             radarChart.invalidate();
+        }
+
+        protected void getEntries(int i){
+            radarEntries = new ArrayList<>();
+            String getDataSet = "dataSet_" + String.valueOf(i);
+            for (int j = 0; j<bundle.getStringArrayList("label").size(); j++){
+                radarEntries.add(new RadarEntry(bundle.getIntegerArrayList(getDataSet).get(j)));
+            }
         }
     }
 }
