@@ -3,6 +3,7 @@ package it.flaviamagnoni.mpandroidchart_t;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -48,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            if (v.getId()==R.id.btnLineChart)
-                startActivity(new Intent(MainActivity.this, LineChartActivity.class));
+            if (v.getId()== R.id.btnLineChart) {
+                Intent intent = new Intent(MainActivity.this, LineChartActivity.class);
+                intent.putExtra("tvLineChartColor", ((ColorDrawable) btnLineChart.getBackground()).getColor()); // Inserisco nel bundle dell'intent il colore che rappresenta il LineChart
+                startActivity(intent);
+            }
             if (v.getId() == R.id.btnBarChart)
                 startActivity(new Intent(MainActivity.this, BarchartInsertDataActivity.class));
             if (v.getId() == R.id.btnRadarChart)
