@@ -2,6 +2,7 @@
     <string name="app_name">""</string>
     <string name="btn_pieChart"> PieChart</string>
     <string name="btn_lineChart">LineChart</string>
+    <string name="tvLineChart_title">LINE CHART</string>
     <string name="btn_barChart">BarChart</string>
     <string name="btn_radarChart">RadarChart</string>
     <string name="tv_enterPieData">Enter new data (value, label): </string>
