@@ -80,6 +80,7 @@ public class RadarChartInsertLabelActivity extends AppCompatActivity {
 
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
+                        break;
                     }
                     Intent intent = new Intent(RadarChartInsertLabelActivity.this, RadarChartInsertDataActivity.class);
                     Bundle bundle = new Bundle();
@@ -87,6 +88,7 @@ public class RadarChartInsertLabelActivity extends AppCompatActivity {
                     bundle.putStringArrayList("label",mRadarChartLabelRows);
                     intent.putExtra("bundle", bundle);
                     startActivity(intent);
+                    break;
             }
         }
 

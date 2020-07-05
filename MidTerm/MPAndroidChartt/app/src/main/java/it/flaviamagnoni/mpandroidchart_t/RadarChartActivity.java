@@ -38,7 +38,8 @@ public class RadarChartActivity extends AppCompatActivity {
                 getEntries(i);
                 String getLabelDataSet = "labelDataSet_" + String.valueOf(i);
                 dataSet = new RadarDataSet(radarEntries,bundle.getString(getLabelDataSet));
-                dataSet.setColor(Color.BLACK);
+                String color = "color_" + String.valueOf(i);
+                dataSet.setColor(getColor(bundle.getInt(color)));
                 data.addDataSet(dataSet);
             }
             XAxis xAxis = radarChart.getXAxis();

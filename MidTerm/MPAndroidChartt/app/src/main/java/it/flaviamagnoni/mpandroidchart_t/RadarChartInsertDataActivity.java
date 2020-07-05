@@ -1,18 +1,26 @@
 package it.flaviamagnoni.mpandroidchart_t;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,9 +42,10 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
         bundle = new Bundle(intent.getBundleExtra("bundle"));
         new Holder();
     }
-    public class Holder implements View.OnClickListener {
+    public class Holder implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
         private EditText etRadarChartDataLabel;
         private Button btnRadarChartCreate, btnAddNewDataRadarChart;
+        private Spinner spinnerColors;
 
         private RecyclerView rvRadarChartInsertData;
         private RadarChartInsertDataActivity.Adapter mRadarChartAdapter;
@@ -44,6 +53,8 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
         Holder(){
             for (int i = 0;i<bundle.getStringArrayList("label").size();i++){
                 RowItem.add(new RadarChartRow(bundle.getStringArrayList("label").get(i),0));}
+
+            Integer colors[] = {R.color.col_1_chart,R.color.col_2_chart,R.color.col_3_chart,R.color.col_4_chart,R.color.col_5_chart,R.color.col_6_chart,R.color.col_7_chart,R.color.col_8_chart,R.color.col_9_chart,R.color.col_10_chart};
 
             rvRadarChartInsertData = findViewById(R.id.rvRadarChartInsertData);
             rvRadarChartInsertData.setHasFixedSize(true);
@@ -56,9 +67,13 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
             etRadarChartDataLabel = findViewById(R.id.etRadarChartDataLabel);
             btnAddNewDataRadarChart = findViewById(R.id.btnAddNewDataRadarChart);
             btnRadarChartCreate = findViewById(R.id.btnRadarChartCreate);
+            spinnerColors = findViewById(R.id.spinnerColors);
+
+            spinnerColors.setAdapter(new SpinnerAdapter(RadarChartInsertDataActivity.this,R.layout.spinner_color, colors));
 
             btnAddNewDataRadarChart.setOnClickListener(this);
             btnRadarChartCreate.setOnClickListener(this);
+            spinnerColors.setOnItemSelectedListener(this);
         }
 
         @Override
@@ -67,7 +82,7 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
             System.out.println(labelData);
             switch (view.getId()){
                 case R.id.btnAddNewDataRadarChart:
-                    if (labelData != null){
+                    if (labelData != ""){
                         InserBundle(labelData);
                         Intent intent = new Intent(RadarChartInsertDataActivity.this, RadarChartInsertDataActivity.class);
                         intent.putExtra("bundle", bundle);
@@ -75,7 +90,7 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
                     }
                     break;
                 case R.id.btnRadarChartCreate:
-                    if (labelData != null){
+                    if (labelData != ""){
                         InserBundle(labelData);
                         Intent intent = new Intent(RadarChartInsertDataActivity.this, RadarChartActivity.class);
                         intent.putExtra("bundle", bundle);
@@ -83,6 +98,23 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
                     }
                     break;
             }
+        }
+
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        }
+
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            String setColor = "color_" + String.valueOf(bundle.getInt("i"));
+            bundle.putInt(setColor, Integer.parseInt(spinnerColors.getItemAtPosition(i).toString()));
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+            String setColor = "color_" + String.valueOf(bundle.getInt("i"));
+            bundle.putInt(setColor, Integer.parseInt(spinnerColors.getItemAtPosition(0).toString()));
         }
     }
 
@@ -101,7 +133,36 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
         bundle.putInt("i", i+=1);
     }
 
-    public static class Adapter extends RecyclerView.Adapter<RadarChartInsertDataActivity.Adapter.ViewHolder> {
+    public class SpinnerAdapter extends ArrayAdapter {
+        private Integer mColors[];
+        public SpinnerAdapter(@NonNull Context context,int spinnerColorId, Integer[] colors) {
+            super(context, spinnerColorId, colors);
+            mColors = colors;
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = getLayoutInflater();
+            View view = inflater.inflate(R.layout.spinner_color, parent, false);
+            ImageView spinnerLayout= (ImageView) view.findViewById(R.id.spinnerLayout);
+            spinnerLayout.setImageResource(mColors[position]);
+            return view;
+        }
+
+        // It gets a View that displays in the drop down popup the data at the specified position
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        // It gets a View that displays the data at the specified position
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+    }
+
+
+            public static class Adapter extends RecyclerView.Adapter<RadarChartInsertDataActivity.Adapter.ViewHolder> {
         private ArrayList<RadarChartRow> mRowItem;
 
         public Adapter(ArrayList<RadarChartRow> rowItem) {
@@ -121,24 +182,25 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
             final RadarChartRow currentItem = mRowItem.get(position);
 
             holder.tvRadarChartDataLabel.setText(currentItem.getLabel());
-            holder.etRadarChartData.addTextChangedListener(new TextWatcher() {
+            holder.etRadarChartData.addTextChangedListener(new TextViewListener() {
                 @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                protected void onTextChanged(String before, String old, String aNew, String after) {
+                    // intuitive usation of parametters
+                    String completeOldText = before + old + after;
+                    String completeNewText = before + aNew + after;
 
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    currentItem.setValue(Integer.valueOf(charSequence.toString()));
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-
+                    // update TextView
+                    startUpdates(); // to prevent infinite loop.
+                    if (completeNewText == ""){
+                        currentItem.setValue(0);
+                    }
+                    else {
+                        currentItem.setValue(Integer.valueOf(completeNewText));
+                    }
+                    endUpdates();
                 }
             });
         }
-
         @Override
         public int getItemCount() {
             return mRowItem.size();
@@ -156,6 +218,82 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
                 tvRadarChartDataLabel = itemView.findViewById(R.id.tvRadarChartDataLabel);
                 etRadarChartData = itemView.findViewById(R.id.etRadarChartData);
             }
+        }
+    }
+    public abstract static class TextViewListener implements TextWatcher {
+        /**
+         * Unchanged sequence which is placed before the updated sequence.
+         */
+        private String _before;
+
+        /**
+         * Updated sequence before the update.
+         */
+        private String _old;
+
+        /**
+         * Updated sequence after the update.
+         */
+        private String _new;
+
+        /**
+         * Unchanged sequence which is placed after the updated sequence.
+         */
+        private String _after;
+
+        /**
+         * Indicates when changes are made from within the listener, should be omitted.
+         */
+        private boolean _ignore = false;
+
+        @Override
+        public void beforeTextChanged(CharSequence sequence, int start, int count, int after) {
+            _before = sequence.subSequence(0,start).toString();
+            _old = sequence.subSequence(start, start+count).toString();
+            _after = sequence.subSequence(start+count, sequence.length()).toString();
+        }
+
+        @Override
+        public void onTextChanged(CharSequence sequence, int start, int before, int count) {
+            _new = sequence.subSequence(start, start+count).toString();
+        }
+
+        @Override
+        public void afterTextChanged(Editable sequence) {
+            if (_ignore)
+                return;
+
+            onTextChanged(_before, _old, _new, _after);
+        }
+
+        /**
+         * Triggered method when the text in the text view has changed.
+         * <br/>
+         * You can apply changes to the text view from this method
+         * with the condition to call {@link #startUpdates()} before any update,
+         * and to call {@link #endUpdates()} after them.
+         *
+         * @param before Unchanged part of the text placed before the updated part.
+         * @param old Old updated part of the text.
+         * @param aNew New updated part of the text?
+         * @param after Unchanged part of the text placed after the updated part.
+         */
+        protected abstract void onTextChanged(String before, String old, String aNew, String after);
+
+        /**
+         * Call this method when you start to update the text view, so it stops listening to it and then prevent an infinite loop.
+         * @see #endUpdates()
+         */
+        protected void startUpdates(){
+            _ignore = true;
+        }
+
+        /**
+         * Call this method when you finished to update the text view in order to restart to listen to it.
+         * @see #startUpdates()
+         */
+        protected void endUpdates(){
+            _ignore = false;
         }
     }
 }
