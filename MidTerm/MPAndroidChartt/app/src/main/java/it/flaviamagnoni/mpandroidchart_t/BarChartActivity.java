@@ -29,23 +29,30 @@ public class BarChartActivity extends AppCompatActivity {
         barChart = findViewById(R.id.barChart);
 
         Intent intent = getIntent();
-        BarInfo bar = intent.getParcelableExtra("barsData0");
-        System.out.println(bar.label);
         BarDataSet barDataSet1;
         BarDataSet barDataSet2;
         BarData barData;
+
         switch(singleBarChart) {
             /**
-             * example of bar chart with two datasets
+             * example of bar chart with one dataset
              */
             case 1:
                 barDataSet1 = new BarDataSet(dataValue1(), "Dataset 1");
-                barDataSet2 = new BarDataSet(dataValue2(), "Dataset 2");
-                barDataSet1.setColor(Color.DKGRAY);
-                barDataSet2.setColor(Color.CYAN);
+                //barDataSet2 = new BarDataSet(dataValue2(), "Dataset 2");
+                ArrayList chart = intent.getParcelableArrayListExtra("chart");
+
+                //creazione del dataset a partire dalle singole barre
+
+
+
+
+                barDataSet1.setColor(Color.CYAN);
+                //barDataSet2.setColor(Color.DKGRAY);
                 barData = new BarData();
                 barData.addDataSet(barDataSet1);
-                barData.addDataSet(barDataSet2);
+                //barData.addDataSet(barDataSet2);
+                barChart.setData(barData);
                 break;
 
             /**

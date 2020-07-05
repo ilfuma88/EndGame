@@ -64,11 +64,14 @@ public class BarchartInsertDataActivity extends AppCompatActivity
                 break;
             case R.id.btnBarchartInserDataCreate:
                 Intent intent = new Intent (BarchartInsertDataActivity.this, BarChartActivity.class);
+                intent.putParcelableArrayListExtra("chart",barsData);
+                /**   codice inutile in  questa versione del progetto, ma date le modeste dimensioni del progetto, mi piace e me lo tengo qui
                 for (int i=0; i < barsData.size(); i++) {
                     String key = "barsData";
                     key = key+String.valueOf(i);
                     intent.putExtra(key, barsData.get(i));
                 }
+                */
                 BarchartInsertDataActivity.this.startActivity(intent);
                 break;
         }
