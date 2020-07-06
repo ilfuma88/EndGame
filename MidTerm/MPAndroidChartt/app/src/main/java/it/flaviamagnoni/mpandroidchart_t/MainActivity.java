@@ -1,6 +1,7 @@
 package it.flaviamagnoni.mpandroidchart_t;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class Holder implements View.OnClickListener{
+        ConstraintLayout clMain;
         ImageView ivTitle;
         Button btnLineChart, btnBarChart, btnRadarChart, btnPieChart;
         Animation transBtnDx = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.translate_btn_dx);
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         Animation fadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
 
         Holder(){
+            clMain = findViewById(R.id.clMain);
+            clMain.setBackground(getDrawable(R.drawable.sfondo_chart));
             btnLineChart = findViewById(R.id.btnLineChart);
             btnBarChart = findViewById(R.id.btnBarChart);
             btnRadarChart = findViewById(R.id.btnRadarChart);
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             if (v.getId()== R.id.btnLineChart) {
                 Intent intent = new Intent(MainActivity.this, LineChartActivity.class);
-                intent.putExtra("tvLineChartColor", ((ColorDrawable) btnLineChart.getBackground()).getColor()); // Inserisco nel bundle dell'intent il colore che rappresenta il LineChart
+//                intent.putExtra("LineChartColor", ((ColorDrawable) btnLineChart.getBackground()).getColor()); // Inserisco nel bundle dell'intent il colore che rappresenta il LineChart
                 startActivity(intent);
             }
             if (v.getId() == R.id.btnBarChart)
