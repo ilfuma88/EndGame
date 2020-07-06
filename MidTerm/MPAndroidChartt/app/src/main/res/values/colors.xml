@@ -15,6 +15,6 @@
     <color name="col_10_chart">#E91E63</color>
     <color name="colBtnLineChart">#c5ff8c</color>
     <color name="colBtnBarChart">#fff78c</color>
-    <color name="colBtnCombinedChart">#ff8e9c</color>
+    <color name="colBtnRadarChart">#ff8e9c</color>
     <color name="colBtnPieChart">#8cebff</color>
 </resources>
