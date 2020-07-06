@@ -7,30 +7,57 @@
     tools:context=".BarchartInsertDataActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvInsertData"
+        android:id="@+id/rvInsertBarData"
         android:layout_width="0dp"
-        android:layout_height="206dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnAddData"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/etBarDataLabel"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/btn_add_data"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvInsertData"
-        app:layout_constraintVertical_bias="0.015" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/et_label_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/etBarDataValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvInsertBarData" />
+
+    <EditText
+        android:id="@+id/etBarDataValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/et_value_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddBarData"
+        app:layout_constraintStart_toEndOf="@+id/etBarDataLabel"
+        app:layout_constraintTop_toBottomOf="@+id/rvInsertBarData" />
 
     <Button
-        android:id="@+id/btnBarchartInserDataCreate"
+        android:id="@+id/btnAddBarData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/btn_add_data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etBarDataValue"
+        app:layout_constraintTop_toBottomOf="@+id/rvInsertBarData" />
+
+    <Button
+        android:id="@+id/btnCreateBarChart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -41,35 +68,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etBarDataValue" />
-
-    <EditText
-        android:id="@+id/etBarDataLabel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="@string/et_label_hint"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/etBarDataValue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvInsertData"
-        app:layout_constraintVertical_bias="0.015" />
-
-    <EditText
-        android:id="@+id/etBarDataValue"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="@string/et_value_hint"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddData"
-        app:layout_constraintStart_toEndOf="@+id/etBarDataLabel"
-        app:layout_constraintTop_toBottomOf="@+id/rvInsertData"
-        app:layout_constraintVertical_bias="0.015" />
 </androidx.constraintlayout.widget.ConstraintLayout>

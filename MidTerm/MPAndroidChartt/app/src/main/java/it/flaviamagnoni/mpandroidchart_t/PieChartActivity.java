@@ -2,22 +2,18 @@ package it.flaviamagnoni.mpandroidchart_t;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.InputType;
-import android.view.KeyEvent;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
@@ -26,32 +22,37 @@ public class PieChartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent i = getIntent();
+        ArrayList<PieInfo> pInfo = i.getParcelableArrayListExtra("arrayValues");
         setContentView(R.layout.activity_pie_chart);
-        new Holder();
+        ArrayList<PieEntry> data = initData(pInfo);
+        new Holder(data);
     }
 
-    Integer value;
-    String label;
+    ArrayList<PieEntry> initData(ArrayList<PieInfo> arrPieInfo){
+        ArrayList<PieEntry> arrPieEntry = new ArrayList<>();
+        for (int i = 0; i< arrPieInfo.size(); i++)
+            arrPieEntry.add(new PieEntry(arrPieInfo.get(i).getValue(), arrPieInfo.get(i).label));
+        return arrPieEntry;
+    }
 
-    class Holder implements View.OnClickListener, EditText.OnEditorActionListener{
+    private ArrayList<PieEntry> dataValues1(){
+        ArrayList<PieEntry> dataVals = new ArrayList<PieEntry>();
+        dataVals.add(new PieEntry(15, "Lun"));
+        dataVals.add(new PieEntry(34, "Mar"));
+        dataVals.add(new PieEntry(23, "Mer"));
+        dataVals.add(new PieEntry(86, "Gio"));
+        dataVals.add(new PieEntry(26, "Ven"));
+        dataVals.add(new PieEntry(18, "Sab"));
+        dataVals.add(new PieEntry(50, "Dom"));
+        return dataVals;
+    }
+
+    class Holder implements View.OnClickListener{
 
         com.github.mikephil.charting.charts.PieChart pieChart;
 
-        private ArrayList<PieEntry> dataValues1(){
-            ArrayList<PieEntry> dataVals = new ArrayList<PieEntry>();
-            dataVals.add(new PieEntry(15, "Lun"));
-            dataVals.add(new PieEntry(34, "Mar"));
-            dataVals.add(new PieEntry(23, "Mer"));
-            dataVals.add(new PieEntry(86, "Gio"));
-            dataVals.add(new PieEntry(26, "Ven"));
-            dataVals.add(new PieEntry(18, "Sab"));
-            dataVals.add(new PieEntry(50, "Dom"));
-            return dataVals;
-        }
-
-        EditText etValue, etLabel, etChangeText;
-        Button btnUpdate, btnClear, btnChangeText;
-        TextView tvNewData;
+        Button btnPieNewData, btnPieChangeText;
 
         //Creo un array di colori che andranno poi associati ai dati tramite il metodo setColors
         Resources res = getResources();
@@ -62,36 +63,23 @@ public class PieChartActivity extends AppCompatActivity {
                 res.getColor(R.color.col_7_chart), res.getColor(R.color.col_8_chart),
                 res.getColor(R.color.col_9_chart), res.getColor(R.color.col_10_chart)};
 
-        Holder(){
+        Holder(ArrayList<PieEntry> dataVals){
             pieChart = findViewById(R.id.pieChart);
-            etValue = findViewById(R.id.etValue);
-            etLabel = findViewById(R.id.etLabel);
-            btnUpdate = findViewById(R.id.btnUpdate);
-            btnClear = findViewById(R.id.btnClearChart);
-            btnChangeText = findViewById(R.id.btnChangeText);
-            tvNewData = findViewById(R.id.tvNewData);
-            etChangeText = findViewById(R.id.etChangeText);
+            btnPieNewData = findViewById(R.id.btnPieNewData);
+            btnPieChangeText = findViewById(R.id.btnPieChangeText);
 
-            etValue.setOnEditorActionListener(this);
-            etLabel.setOnEditorActionListener(this);
-            etChangeText.setOnEditorActionListener(this);
-            etChangeText.setVisibility(View.INVISIBLE);
-            btnUpdate.setOnClickListener(this);
-            btnClear.setOnClickListener(this);
-            btnChangeText.setOnClickListener(this);
-
-            etValue.setInputType(InputType.TYPE_CLASS_NUMBER);
-            etLabel.setInputType(InputType.TYPE_CLASS_TEXT);
+            btnPieNewData.setOnClickListener(this);
+            btnPieChangeText.setOnClickListener(this);
 
             //Passo 2
-            PieDataSet pieDataSet = new PieDataSet(dataValues1(), "");
+            PieDataSet pieDataSet = new PieDataSet(dataVals, "");
 
             pieDataSet.setColors(colorClassArray);
             //Passo 3
             PieData pieData = new PieData(pieDataSet);
             //Passo 4
             pieChart.setData(pieData);
-            pieChart.setDescription(null);
+            //pieChart.setDescription(null);
             pieChart.setCenterText("My First PieChart");
             pieChart.setCenterTextSize(30);
             //pieChart.setCenterTextRadiusPercent(30);
@@ -101,38 +89,14 @@ public class PieChartActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            if (v.getId()==R.id.btnUpdate){
+            if (v.getId() == R.id.btnPieNewData){
+                startActivity(new Intent(PieChartActivity.this, PieChartInsertDataActivity.class));
             }
-            if (v.getId() == R.id.btnClearChart){
-            }
-            if (v.getId() == R.id.btnChangeText){
-                etChangeText.setVisibility(View.VISIBLE);
+            if (v.getId() == R.id.btnPieChangeText){
+                pieChart.setCenterText("");
             }
         }
 
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            if (actionId == EditorInfo.IME_ACTION_DONE){
-//                if (v.getId() == R.id.etValue){
-//                    value = Integer.parseInt(etValue.getText().toString());
-//                }
-//                if (v.getId()==R.id.etLabel)
-//                    label = etLabel.getText().toString();
-//                    tvNewData.append(" (".concat(etValue.getText().toString().concat(", ").concat(label)).concat(")"));
-                if (v.getId() == R.id.etChangeText)
-                    pieChart.setCenterText(etChangeText.getText().toString());
-                etChangeText.setText("");
-            }
-            return false;
-        }
-
-        void clearChart(){
-            //ArrayList<PieEntry> data = new ArrayList<PieEntry>();
-            //PieDataSet pieDataSet0 = new PieDataSet(data, "voidChart");
-            //PieData pieData0 = new PieData(pieDataSet0);
-            //pieChart.setData(pieData0);
-            //pieChart.invalidate();
-        }
     }
 
 }

@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BarChartActivity"></activity>
-        <activity android:name=".RadarChartInsertDataActivity"/>
-        <activity android:name=".BarchartInsertDataActivity"/>
+        <activity android:name=".PieChartInsertDataActivity"></activity>
+        <activity android:name=".BarChartActivity" />
+        <activity android:name=".RadarChartInsertDataActivity" />
+        <activity android:name=".BarchartInsertDataActivity" />
         <activity android:name=".LineChartActivity" />
         <activity android:name=".PieChartActivity" />
         <activity android:name=".MainActivity">

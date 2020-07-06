@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -18,16 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import static it.flaviamagnoni.mpandroidchart_t.BarInfo.SomeBarInfo;
-
 public class BarchartInsertDataActivity extends AppCompatActivity
                                         implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter barChartAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private Button btnAddData;
-    private Button btnCreateChart;
+    private Button btnAddBarData;
+    private Button btnCreateBarChart;
     private ArrayList <BarInfo> barsData = new ArrayList<>();
     private EditText etBarDataLabel;
     private EditText etBarDataValue;
@@ -37,17 +34,17 @@ public class BarchartInsertDataActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barchart_insertdata);
 
-        recyclerView = findViewById(R.id.rvInsertData);
+        recyclerView = findViewById(R.id.rvInsertBarData);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
         barChartAdapter = new DataAdapter(barsData);
         recyclerView.setAdapter(barChartAdapter);
-        btnAddData = findViewById(R.id.btnAddData);
-        btnAddData.setOnClickListener(this);
-        btnCreateChart = findViewById(R.id.btnBarchartInserDataCreate);
-        btnCreateChart.setOnClickListener(this);
+        btnAddBarData = findViewById(R.id.btnAddBarData);
+        btnAddBarData.setOnClickListener(this);
+        btnCreateBarChart = findViewById(R.id.btnCreateBarChart);
+        btnCreateBarChart.setOnClickListener(this);
         etBarDataLabel = findViewById(R.id.etBarDataLabel);
         etBarDataValue = findViewById(R.id.etBarDataValue);
     }
@@ -55,14 +52,14 @@ public class BarchartInsertDataActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnAddData:
+            case R.id.btnAddBarData:
                 barsData.add(new BarInfo(etBarDataLabel.getText().toString(),
                         etBarDataValue.getText().toString()));
                 barChartAdapter.notifyDataSetChanged();
                 etBarDataLabel.setText("");
                 etBarDataValue.setText("");
                 break;
-            case R.id.btnBarchartInserDataCreate:
+            case R.id.btnCreateBarChart:
                 Intent intent = new Intent (BarchartInsertDataActivity.this, BarChartActivity.class);
                 intent.putParcelableArrayListExtra("chart",barsData);
                 /**   codice inutile in  questa versione del progetto, ma date le modeste dimensioni del progetto, mi piace e me lo tengo qui

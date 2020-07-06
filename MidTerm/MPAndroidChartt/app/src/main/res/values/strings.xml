@@ -5,13 +5,12 @@
     <string name="tvLineChart_title">LINE CHART</string>
     <string name="btn_barChart">BarChart</string>
     <string name="btn_radarChart">RadarChart</string>
-    <string name="tv_enterPieData">Enter new data (value, label): </string>
-    <string name="et_pieChart_input_value">Value</string>
-    <string name="et_pieChart_input_label">Label</string>
-    <string name="btn_pieChart_update"> Update chart</string>
     <string name="invalid_pieChart_input_toast"> Invalid format</string>
-    <string name="btn_clear_chart">Clear chart</string>
+    <string name="tst_no_label">No label inserted</string>
+    <string name="tst_no_value">No value inserted</string>
     <string name="btn_changeCenterText">Change Center Text</string>
+    <string name="tv_create_pieChart">Enter new data and create your PieChart</string>
+    <string name="btn_new_data">New data</string>
     <string name="btn_add_data">Add Data</string>
     <string name="btn_create_chart">Create Chart</string>
     <string name="et_label_hint">Label</string>
@@ -19,7 +18,7 @@
     <string name="et_temperature_hint">Temperature</string>
     <string name="et_value_hint">Value</string>
     <string name="et_label_data_hint">Label Data</string>
-    <string name="btn_add_label">add label</string>
+    <string name="btn_add_label">Add label</string>
     <string name="et_axis_label">Axis label</string>
     <string name="et_data_set_hint">Add dataset name</string>
 
