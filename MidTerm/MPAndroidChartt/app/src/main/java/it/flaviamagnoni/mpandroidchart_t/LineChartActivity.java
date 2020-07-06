@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,9 +39,9 @@ public class LineChartActivity extends AppCompatActivity {
         holder = new Holder(this);
 
         Intent intent = getIntent();
-        int tvLineChartTitleColor = intent.getIntExtra("tvLineChartColor", 0);  // Recupero dal bundle dell'intent il colore dello sfondo del titolo
+//        int lineChartColor = intent.getIntExtra("LineChartColor", 0);  // Recupero dal bundle dell'intent il colore dello sfondo del titolo
 
-        holder.setTitleColor(tvLineChartTitleColor);    // Imposto il colore del titolo, utilizzando l'Holder
+//        holder.setColor(/*lineChartColor*/);    // Imposto il colore del titolo, utilizzando l'Holder
     }
 
     public void deleteItem(int position) {
@@ -49,11 +50,17 @@ public class LineChartActivity extends AppCompatActivity {
         holder.getLineChartAdapter().notifyItemRemoved(position);
     }
 
+    private void createLineChart(List<String> myHourDataset, List<String> myTemperatureDataset, LineChart lineChart) {
+    }
+
     /* La classe Holder si occuperà della gestione dell'interfaccia dell'Activity.
      * Utilizzo il paradigma Model view viewControl
      */
     class Holder implements View.OnClickListener {
         private Context context;
+        private ConstraintLayout clLineChart;
+        private int color = getColor(R.color.colBtnLineChart);
+
         private TextView tvLineChartTitle;
         private RecyclerView rvLineChartData;
         private RecyclerView.LayoutManager layoutManager;
@@ -67,18 +74,26 @@ public class LineChartActivity extends AppCompatActivity {
          */
         public Holder(Context context) {
             this.context = context;
+
+            clLineChart = findViewById(R.id.clLineChart);
+            clLineChart.setBackground(getDrawable(R.drawable.sfondo_chart));
+
             tvLineChartTitle = findViewById(R.id.tvLineChartTitle);
+            tvLineChartTitle.setBackgroundColor(color);
 
             rvLineChartData = findViewById(R.id.rvInsertLineChartData);
             layoutManager = new LinearLayoutManager(context);
             mAdapter = new MyAdapter(myHourDataset, myTemperatureDataset);
             rvLineChartData.setLayoutManager(layoutManager);
             rvLineChartData.setAdapter(mAdapter);
+            rvLineChartData.setBackgroundColor(Color.WHITE);
 
             etlineDataHour = findViewById(R.id.etlineDataHour);
             etLineDataTemperature = findViewById(R.id.etLineDataTemperature);
+
             btnAddLineChartData = findViewById(R.id.btnAddLineChartData);
             btnCreateLineChart = findViewById(R.id.btnCreateLineChart);
+
             lineChart = findViewById(R.id.lineChart);
 
             btnAddLineChartData.setOnClickListener(this);
@@ -88,10 +103,11 @@ public class LineChartActivity extends AppCompatActivity {
         /* setTitleColor(int): void. Metodo che imposta il colore del titolo
          * @param color: int. E' il valore intero del colore da impostare come sfondo del titolo
          */
-        public void setTitleColor(int color) {
-            tvLineChartTitle.setBackgroundColor(color); // Imposto lo sfondo della TextView
-            tvLineChartTitle.setTextColor(Color.BLACK); // Imposto il colore del testo della TextView
-        }
+//        public void setColor(/*int color*/) {
+//            tvLineChartTitle.setBackgroundColor(getColor(R.color.colBtnLineChart)); // Imposto lo sfondo della TextView
+//            tvLineChartTitle.setTextColor(Color.BLACK); // Imposto il colore del testo della TextView
+//            clLineChart.setBackground(getDrawable(R.drawable.sfondo_chart));
+//        }
 
         public RecyclerView.Adapter getLineChartAdapter() {
             return mAdapter;
@@ -107,6 +123,10 @@ public class LineChartActivity extends AppCompatActivity {
                     etlineDataHour.setText("");
                     etLineDataTemperature.setText("");
                 }
+            }
+            if (v.getId() == R.id.btnCreateLineChart) {
+//                CreateLineChartActivity.createLineChart(context, myHourDataset, myTemperatureDataset, lineChart);
+                createLineChart(myHourDataset, myTemperatureDataset, lineChart);
             }
         }
     }
