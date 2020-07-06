@@ -19,6 +19,7 @@
 
     <EditText
         android:id="@+id/etRadarChartData"
+        android:hint="@string/et_value_hint"
         android:inputType="text"
         android:layout_width="60dp"
         android:layout_height="wrap_content"

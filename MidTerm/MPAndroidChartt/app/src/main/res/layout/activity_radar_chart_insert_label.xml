@@ -28,7 +28,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="@string/et_label_hint"
+        android:hint="@string/et_axis_label"
         android:inputType="text"
         android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/btnRadarChartAddData"
@@ -45,12 +45,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/btn_add_label"
+        android:background="@drawable/capsule_btn_radar_chart"
         app:layout_constraintBottom_toTopOf="@+id/btnRadarChartAddData"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvInsertRadarChart" />
 
     <Button
         android:id="@+id/btnRadarChartAddData"
+        android:background="@drawable/capsule_btn_radar_chart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -20,6 +20,8 @@
     <string name="et_value_hint">Value</string>
     <string name="et_label_data_hint">Label Data</string>
     <string name="btn_add_label">add label</string>
+    <string name="et_axis_label">Axis label</string>
+    <string name="et_data_set_hint">Add dataset name</string>
 
 </resources>
 
