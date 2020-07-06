@@ -29,7 +29,7 @@
         android:layout_marginEnd="@dimen/margin_distance"
         android:ems="10"
         android:hint="@string/et_temperature_hint"
-        android:inputType="numberDecimal"
+        android:inputType="numberSigned|numberDecimal"
         app:layout_constraintEnd_toStartOf="@+id/btnAddLineChartData"
         app:layout_constraintStart_toEndOf="@+id/etlineDataHour"
         app:layout_constraintTop_toBottomOf="@+id/rvInsertLineChartData" />
@@ -43,7 +43,7 @@
         android:layout_marginEnd="@dimen/margin_distance"
         android:ems="10"
         android:hint="@string/et_hour_hint"
-        android:inputType="time"
+        android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/etLineDataTemperature"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvInsertLineChartData" />

@@ -9,12 +9,12 @@
         android:id="@+id/tvLineTemperatureData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_distance"
+        android:layout_marginEnd="100dp"
         android:padding="@dimen/tv_padding"
         android:text="TextView"
         android:textSize="@dimen/txt_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvLineHourData"
+        app:layout_constraintEnd_toStartOf="@+id/ivDeleteLineChartData"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
