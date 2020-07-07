@@ -2,6 +2,8 @@ package it.flaviamagnoni.mpandroidchart_t;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,7 @@ public class BarchartInsertDataActivity extends AppCompatActivity
     private ArrayList <BarInfo> barsData = new ArrayList<>();
     private EditText etBarDataLabel;
     private EditText etBarDataValue;
+    private ArrayList<String> labels = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +57,8 @@ public class BarchartInsertDataActivity extends AppCompatActivity
         switch (v.getId()) {
             case R.id.btnAddBarData:
                 barsData.add(new BarInfo(etBarDataLabel.getText().toString(),
-                        etBarDataValue.getText().toString()));
+                                            etBarDataValue.getText().toString()));
+                labels.add(etBarDataLabel.getText().toString());
                 barChartAdapter.notifyDataSetChanged();
                 etBarDataLabel.setText("");
                 etBarDataValue.setText("");
@@ -69,6 +73,9 @@ public class BarchartInsertDataActivity extends AppCompatActivity
                     intent.putExtra(key, barsData.get(i));
                 }
                 */
+
+                intent.putStringArrayListExtra("labels", labels);
+
                 BarchartInsertDataActivity.this.startActivity(intent);
                 break;
         }
