@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">""</string>
+    <string name="app_name">MPAndroidChart</string>
     <string name="btn_pieChart"> PieChart</string>
     <string name="btn_lineChart">LineChart</string>
     <string name="tvLineChart_title">LINE CHART</string>
@@ -8,6 +8,8 @@
     <string name="invalid_pieChart_input_toast"> Invalid format</string>
     <string name="tst_no_label">No label inserted</string>
     <string name="tst_no_value">No value inserted</string>
+    <string name="r_btn_values">Values</string>
+    <string name="r_btn_percent">Percent values</string>
     <string name="btn_changeCenterText">Change Center Text</string>
     <string name="tv_create_pieChart">Enter new data and create your PieChart</string>
     <string name="btn_new_data">New data</string>

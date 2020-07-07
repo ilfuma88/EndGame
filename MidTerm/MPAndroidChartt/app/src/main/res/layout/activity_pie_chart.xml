@@ -44,4 +44,38 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/capsule_btn_pie_chart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pieChart" >
+
+        <RadioButton
+            android:id="@+id/rbtnValues"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/capsule_btn_pie_chart"
+            android:text="@string/r_btn_values" />
+
+        <RadioButton
+            android:id="@+id/rbtnPercent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/capsule_btn_pie_chart"
+            android:text="@string/r_btn_percent" />
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

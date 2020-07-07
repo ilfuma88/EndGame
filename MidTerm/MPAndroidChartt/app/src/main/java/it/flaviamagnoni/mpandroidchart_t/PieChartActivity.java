@@ -84,6 +84,8 @@ public class PieChartActivity extends AppCompatActivity {
             pieChart.setCenterTextSize(30);
             //pieChart.setCenterTextRadiusPercent(30);
             pieChart.setEntryLabelColor(Color.BLACK);
+            pieChart.setDrawEntryLabels(true);
+            pieChart.setEntryLabelTextSize(R.dimen.txt_size);
             pieChart.invalidate();
         }
 
