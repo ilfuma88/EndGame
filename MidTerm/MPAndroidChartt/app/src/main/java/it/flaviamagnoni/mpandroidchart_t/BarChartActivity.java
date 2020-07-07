@@ -32,27 +32,33 @@ public class BarChartActivity extends AppCompatActivity {
         BarDataSet barDataSet1;
         BarDataSet barDataSet2;
         BarData barData;
+        XAxis xAxis = barChart.getXAxis();
+        float barSpace = 0.08f;
+        float groupSpace = 0.44f;
+
 
         switch(singleBarChart) {
             /**
              * example of bar chart with one dataset
              */
             case 1:
-                barDataSet1 = new BarDataSet(dataValue1(), "Dataset 1");
+                //barDataSet1 = new BarDataSet(dataValue1(), "Dataset 1");
                 //barDataSet2 = new BarDataSet(dataValue2(), "Dataset 2");
                 ArrayList chart = intent.getParcelableArrayListExtra("chart");
+                ArrayList <String> labels = intent.getStringArrayListExtra("labels");
 
                 //creazione del dataset a partire dalle singole barre
-
-
-
-
+                barDataSet1 = new BarDataSet(userData(chart), "mario rossi's graph");
                 barDataSet1.setColor(Color.CYAN);
                 //barDataSet2.setColor(Color.DKGRAY);
                 barData = new BarData();
                 barData.addDataSet(barDataSet1);
                 //barData.addDataSet(barDataSet2);
                 barChart.setData(barData);
+
+                xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
+                xAxis.setCenterAxisLabels(false);
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                 break;
 
             /**
@@ -82,7 +88,6 @@ public class BarChartActivity extends AppCompatActivity {
                 barChart.setData(barData);
 
                 String[] days = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-                XAxis xAxis = barChart.getXAxis();
                 xAxis.setValueFormatter(new IndexAxisValueFormatter(days));
                 xAxis.setCenterAxisLabels(true);
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -91,8 +96,7 @@ public class BarChartActivity extends AppCompatActivity {
 
                 barChart.setDragEnabled(true);
                 barChart.setVisibleXRangeMaximum(3);
-                float barSpace = 0.08f;
-                float groupSpace = 0.44f;
+
                 barData.setBarWidth(0.10f);
                 barChart.getXAxis().setAxisMinimum(0);
                 barChart.getXAxis().setAxisMaximum(0 + barChart.getBarData().getGroupWidth(groupSpace, barSpace) * 7);
@@ -102,6 +106,15 @@ public class BarChartActivity extends AppCompatActivity {
                 break;
         }
         barChart.invalidate();
+    }
+
+
+    private ArrayList<BarEntry> userData(ArrayList<BarInfo> chart){
+        ArrayList<BarEntry> dataVals = new ArrayList<BarEntry>();
+        for(int i=0; i< chart.size(); i++){
+            dataVals.add(new BarEntry(i, Float.parseFloat(chart.get(i).value)));
+        }
+        return dataVals;
     }
 
     private ArrayList<BarEntry> dataValue1(){
