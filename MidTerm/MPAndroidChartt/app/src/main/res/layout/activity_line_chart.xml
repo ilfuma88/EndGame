@@ -2,70 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clLineChart"
+    android:id="@+id/clLineChartActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/sfondo_chart"
     tools:context=".LineChartActivity">
-
-    <Button
-        android:id="@+id/btnCreateLineChart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_distance"
-        android:layout_marginEnd="@dimen/margin_distance"
-        android:layout_marginBottom="@dimen/margin_distance"
-        android:background="@drawable/capsule_btn_linear_chart"
-        android:text="@string/btn_create_chart"
-        android:textSize="@dimen/txt_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/etLineDataTemperature"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_distance"
-        android:layout_marginEnd="@dimen/margin_distance"
-        android:ems="10"
-        android:hint="@string/et_temperature_hint"
-        android:inputType="numberSigned|numberDecimal"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddLineChartData"
-        app:layout_constraintStart_toEndOf="@+id/etlineDataHour"
-        app:layout_constraintTop_toBottomOf="@+id/rvInsertLineChartData" />
-
-    <EditText
-        android:id="@+id/etlineDataHour"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_distance"
-        android:layout_marginTop="@dimen/margin_distance"
-        android:layout_marginEnd="@dimen/margin_distance"
-        android:ems="10"
-        android:hint="@string/et_hour_hint"
-        android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/etLineDataTemperature"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvInsertLineChartData" />
-
-    <Button
-        android:id="@+id/btnAddLineChartData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_distance"
-        android:layout_marginEnd="@dimen/margin_distance"
-        android:background="@drawable/capsule_btn_linear_chart"
-        android:text="@string/btn_add_data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvInsertLineChartData" />
 
     <TextView
         android:id="@+id/tvLineChartTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_distance"
+        android:background="@color/colBtnLineChart"
+        android:fontFamily="sans-serif-black"
         android:padding="@dimen/tv_padding"
-        android:text="@string/tvLineChart_title"
+        android:text="TextView"
         android:textAlignment="center"
         android:textSize="@dimen/txt_size"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,27 +24,14 @@
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/margin_distance"
         android:layout_marginTop="@dimen/margin_distance"
         android:layout_marginEnd="@dimen/margin_distance"
         android:layout_marginBottom="@dimen/margin_distance"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreateLineChart"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLineDataTemperature" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvInsertLineChartData"
-        android:layout_width="0dp"
-        android:layout_height="195dp"
-        android:layout_marginStart="@dimen/margin_distance"
-        android:layout_marginTop="@dimen/margin_distance"
-        android:layout_marginEnd="@dimen/margin_distance"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLineChartTitle" />
 
