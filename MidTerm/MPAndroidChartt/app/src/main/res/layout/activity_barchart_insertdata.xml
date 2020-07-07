@@ -52,6 +52,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="@string/btn_add_data"
+        android:background="@drawable/capsule_btn_bar_chart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etBarDataValue"
         app:layout_constraintTop_toBottomOf="@+id/rvInsertBarData" />
@@ -65,6 +66,7 @@
         android:layout_marginEnd="8dp"
         android:text="@string/btn_create_chart"
         android:textSize="@dimen/txt_size"
+        android:background="@drawable/capsule_btn_bar_chart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etBarDataValue" />
