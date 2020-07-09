@@ -39,7 +39,7 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
     private Holder holder;  // E' l'oggetto che gestisce l'interfaccia dell'Activity
     private ArrayList<Integer> mHourDataset, mTemperatureDataset;    // Array di interi che contengono l'input dell'utente
     private Intent intent;
-    private int latestHour = 0; // Ultimo input Label inserito (Hour)
+    private int latestHour; // Ultimo dato Label dell'array mHourDataset (Hour)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,8 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
         mTemperatureDataset = new ArrayList<>();    // Creo l'array (inizialmente array vuoto) che conterrà gli input value (Temperature)
 
         intent = getIntent();
+
+        latestHour = 0;
     }
 
     /**
@@ -120,10 +122,10 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
                 // Verifico che gli input siano corretti (non null e le ore nel range 0 -:- 23)
                 if (((etlineDataHour.getText() != null) && (!hour.equals(""))) && ((etLineDataTemperature.getText() != null) && (!temperature.equals("")))) {
                     if (((Integer.parseInt(hour)) >= 0) && ((Integer.parseInt(hour)) <= 23)) {
-                        if (Integer.parseInt(hour) >= latestHour) {
+                        if (Integer.parseInt(hour) >= latestHour) { // Eseguo il codice solo se l'utente ha inserito una label Hour >= latestHour (ultimo elemento nell'array; al primo inserimento = 0)
                             mHourDataset.add(Integer.parseInt(hour)); // Aggiungo l'input hour alla Lista relativa
                             mTemperatureDataset.add(Integer.parseInt(temperature));   // Aggiungo l'input temperature alla lista relativa
-                            latestHour = Integer.parseInt(hour);    // Aggiorno con l'ultimo input hour inserito
+                            latestHour = mHourDataset.get((mHourDataset.size()) - 1);   // Aggiorno latestHour con l'ultimo elemento dell'array mHourDataset
                             mAdapter.notifyDataSetChanged();    // Notifico all'Adapter che deve aggiungere la vista alla RecyclerView
                             etlineDataHour.setText("");
                             etLineDataTemperature.setText("");
@@ -250,6 +252,7 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
     private void deleteItem(int adapterPosition) {
         mHourDataset.remove(adapterPosition);   // Rimuove, dall'array mHourDataset, il dato con indice adapterPosition
         mTemperatureDataset.remove(adapterPosition);    // Rimuove, dall'array mTemperatureDataset, il dato con indice adapterPosition
+        latestHour = mHourDataset.get((mHourDataset.size()) - 1);   // Aggiorno latestHour con l'ultimo elemento dell'array mHourDataset
         holder.getLineChartAdapter().notifyItemRemoved(adapterPosition);   // Avviso l'Adapter che una vista della RecyclerView è stata rimossa
     }
 }
