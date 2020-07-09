@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,7 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
 
         intent = getIntent();
 
-        latestHour = 0;
+        latestHour = -1;
     }
 
     /**
@@ -122,14 +123,29 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
                 // Verifico che gli input siano corretti (non null e le ore nel range 0 -:- 23)
                 if (((etlineDataHour.getText() != null) && (!hour.equals(""))) && ((etLineDataTemperature.getText() != null) && (!temperature.equals("")))) {
                     if (((Integer.parseInt(hour)) >= 0) && ((Integer.parseInt(hour)) <= 23)) {
-                        if (Integer.parseInt(hour) >= latestHour) { // Eseguo il codice solo se l'utente ha inserito una label Hour >= latestHour (ultimo elemento nell'array; al primo inserimento = 0)
+                        if (Integer.parseInt(hour) > latestHour) { // Eseguo il codice solo se l'utente ha inserito una label Hour >= latestHour (ultimo elemento nell'array; al primo inserimento = 0)
                             mHourDataset.add(Integer.parseInt(hour)); // Aggiungo l'input hour alla Lista relativa
                             mTemperatureDataset.add(Integer.parseInt(temperature));   // Aggiungo l'input temperature alla lista relativa
                             latestHour = mHourDataset.get((mHourDataset.size()) - 1);   // Aggiorno latestHour con l'ultimo elemento dell'array mHourDataset
                             mAdapter.notifyDataSetChanged();    // Notifico all'Adapter che deve aggiungere la vista alla RecyclerView
                             etlineDataHour.setText("");
                             etLineDataTemperature.setText("");
+                        } else {
+                            Toast.makeText(context, "Insert an hour greater than the previous one!", Toast.LENGTH_LONG).show();
                         }
+                    } else {
+                        Toast.makeText(context, "No valid hour! Insert an hour between 0 -:- 23!", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    if (!(hour.equals("") && temperature.equals(""))) {
+                        if (hour.equals("")) {
+                            Toast.makeText(context, "Insert an Hour!", Toast.LENGTH_LONG).show();
+                        }
+                        if (temperature.equals("")) {
+                            Toast.makeText(context, "Insert a Temperature!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(context, "Insert an Hour and a Temperature!", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -252,7 +268,11 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
     private void deleteItem(int adapterPosition) {
         mHourDataset.remove(adapterPosition);   // Rimuove, dall'array mHourDataset, il dato con indice adapterPosition
         mTemperatureDataset.remove(adapterPosition);    // Rimuove, dall'array mTemperatureDataset, il dato con indice adapterPosition
-        latestHour = mHourDataset.get((mHourDataset.size()) - 1);   // Aggiorno latestHour con l'ultimo elemento dell'array mHourDataset
+        if (mHourDataset.size() > 0) {
+            latestHour = mHourDataset.get((mHourDataset.size()) - 1);   // Aggiorno latestHour con l'ultimo elemento dell'array mHourDataset
+        } else {
+            latestHour = -1;
+        }
         holder.getLineChartAdapter().notifyItemRemoved(adapterPosition);   // Avviso l'Adapter che una vista della RecyclerView è stata rimossa
     }
 }
