@@ -16,6 +16,10 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -49,7 +53,7 @@ public class LineChartActivity extends AppCompatActivity {
 
     /**
      * createLineChart() è il metodo che si occupa della costruzione dei dati da visualizzare
-     * nel LineChart.
+     * nel LineChart, e che chiama la gestione dello stile dei dati e la creazione del chart.
      */
     public void createLineChart() {
         List<Entry> entries = new ArrayList<Entry>();   // Array di Entry. La classe Entry rappresenta una entry nel chart, con coordinate (x, y)
@@ -63,12 +67,9 @@ public class LineChartActivity extends AppCompatActivity {
         }
 
         LineDataSet dataSet = new LineDataSet(entries, ""); // Aggiungo le entries al DataSet object, che tiene i dati insieme, e permette di uniformare lo stile
-        //dataSet.setColor();   // Styling
-        //dataSet.setValueTextColor();  // Styling
-
+        holder.stylingDataset(dataSet); // Gestisco lo stile del LineDataSet object con un metodo dell'Holder
         LineData lineData = new LineData(dataSet);  // Aggiungo i dataSet objects ad un lineData object, che contiene tutti i dati rappresentati dal LineChart
-
-        holder.createChart(lineData);   // Chiama il metodo dell'Holder che aggiorna e disegna il LineChart
+        holder.createChart(lineData);   // Chiamo il metodo dell'Holder che aggiorna e disegna il LineChart
     }
 
     /**
@@ -86,6 +87,7 @@ public class LineChartActivity extends AppCompatActivity {
         private TextView tvLineChartTitle;
 
         private LineChart lineChart;    // Questa View è il LineChart
+        private Legend legend;
 
         /**
          * Holder(Context) è il costruttore. Qui vengono collegate le viste nel Layout
@@ -102,16 +104,91 @@ public class LineChartActivity extends AppCompatActivity {
             tvLineChartTitle.setBackgroundColor(lineChartActivityColor);
 
             lineChart = findViewById(R.id.lineChart);
-            lineChart.setBackgroundColor(Color.WHITE);
+
+            legend = lineChart.getLegend();
+        }
+
+        /**
+         * stylingDataset() gestisce lo stile del LineDataSet object
+         * @param dataSet : oggetto che tiene i dati insieme, permettendo di uniformare lo stile
+         */
+        public void stylingDataset(LineDataSet dataSet) {
+            // Styling del dataset
+            dataSet.setColor(Color.RED);
+            dataSet.setCircleColor(Color.BLACK);
+            dataSet.setCircleRadius(5);
+            dataSet.setCircleHoleColor(Color.YELLOW);
+            dataSet.setCircleHoleRadius(3);
+            dataSet.setLabel("Temperature trend");
+            dataSet.setValueTextSize(14);
+            dataSet.setValueTextColor(Color.BLUE);  // Styling
+            dataSet.setMode(LineDataSet.Mode.LINEAR);
+            dataSet.setLineWidth((float)1.5);
         }
 
         /**
          * createChart metodo dell'Holder che carica i dati nel chart,
-         * aggiorna e disegna il LineChart.
+         * disegna il LineChart e, poi, lo aggiorna (refresh).
          * @param lineData : data object che deve essere settato nel chart.
          */
         public void createChart(LineData lineData) {
+            lineChart.setBackgroundColor(Color.WHITE);
+            Description description = new Description();
+            description.setText("Temperature LineChart");
+            lineChart.setDescription(description);
+
             lineChart.setData(lineData);    // Setto il data object lineData nel chart
+
+            XAxis xAxis = lineChart.getXAxis(); // Prendo l'asse delle x (Hour)
+            YAxis yAxisRight = lineChart.getAxisRight();    // Prendo l'asse y a destra del LineChart
+            YAxis yAxisLeft = lineChart.getAxisLeft();  //Prendo l'asse y a sinistra del LineChart
+
+            // Gestisco lo stile degli assi
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);  // Posiziono l'asse delle x lungo l'asse orizzontale in basso al chart
+            xAxis.setAxisLineColor(Color.BLACK);
+            xAxis.setAxisLineWidth(2);
+            xAxis.setDrawLabels(true);
+            xAxis.setAxisMinimum(0);
+            xAxis.setAxisMaximum(24);
+            xAxis.enableGridDashedLine(20,20,20);
+            xAxis.setTextSize(14);
+            xAxis.setDrawGridLines(true);
+            xAxis.setGridLineWidth((float) 0.5);
+
+            yAxisRight.setDrawLabels(false);    // Non disegno l'asse delle y (Temperature) lungo l'asse verticale di destra (in questo modo è disegnato solo a sinistra)
+            yAxisLeft.setAxisLineColor(Color.BLACK);
+            yAxisLeft.setAxisLineWidth(2);
+            yAxisLeft.setDrawLabels(true);
+            //yAxisLeft.setAxisMinimum(0);
+            yAxisLeft.setAxisMinimum(-20f);
+            //yAxisLeft.setAxisMaximum(50);
+            yAxisLeft.setAxisMaximum(50f);
+            yAxisLeft.setTextSize(14);
+            yAxisLeft.setDrawGridLines(true);
+            yAxisLeft.setGridLineWidth((float) 0.5);
+            yAxisLeft.enableGridDashedLine(20,20,20);
+
+            yAxisRight.setDrawGridLines(false);
+            yAxisRight.enableAxisLineDashedLine(20,20,20);
+            yAxisRight.setDrawAxisLine(false);
+            //yAxisLeft.setUseAutoScaleMinRestriction(true);
+            //yAxisLeft.setUseAutoScaleMaxRestriction(true);
+
+            // Gestisco lo stile della Legend
+            legend.setEnabled(true);
+            legend.setTextSize(18);
+            legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+            legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+            legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+            legend.setDrawInside(true);
+            legend.setYOffset(10);
+
+            // Gestisco lo stile del LineChart
+            lineChart.animateXY(1500, 3000);
+            lineChart.setBackgroundColor(Color.WHITE);
+            lineChart.setExtraOffsets(5,20,20,50);
+            //lineChart.setVisibleXRange((float) 1, (float) 1);
+
             lineChart.invalidate(); // Refresh del LineChart
         }
     }
