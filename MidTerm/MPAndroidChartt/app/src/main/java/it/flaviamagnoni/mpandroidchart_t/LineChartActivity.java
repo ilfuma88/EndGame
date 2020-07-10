@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -80,6 +81,7 @@ public class LineChartActivity extends AppCompatActivity {
      */
     class Holder {
         private Context context;    // Rappresenta il contesto in cui l'Activity gira (LineChartActivity)
+        private int orientation = getResources().getConfiguration().orientation;
         private int lineChartActivityColor = getColor(R.color.colBtnLineChart); // Colore che rappresenta il LineChart
 
         // Definizione delle View e ViewGroup che realizzano il Layout
@@ -120,7 +122,7 @@ public class LineChartActivity extends AppCompatActivity {
             dataSet.setCircleHoleColor(Color.YELLOW);
             dataSet.setCircleHoleRadius(3);
             dataSet.setLabel("Temperature trend");
-            dataSet.setValueTextSize(14);
+            dataSet.setValueTextSize(12);
             dataSet.setValueTextColor(Color.BLUE);  // Styling
             dataSet.setMode(LineDataSet.Mode.LINEAR);
             dataSet.setLineWidth((float)1.5);
@@ -154,19 +156,23 @@ public class LineChartActivity extends AppCompatActivity {
             xAxis.setTextSize(14);
             xAxis.setDrawGridLines(true);
             xAxis.setGridLineWidth((float) 0.5);
+            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                xAxis.setLabelCount(23);
+            }
 
             yAxisRight.setDrawLabels(false);    // Non disegno l'asse delle y (Temperature) lungo l'asse verticale di destra (in questo modo è disegnato solo a sinistra)
             yAxisLeft.setAxisLineColor(Color.BLACK);
             yAxisLeft.setAxisLineWidth(2);
             yAxisLeft.setDrawLabels(true);
-            //yAxisLeft.setAxisMinimum(0);
-            yAxisLeft.setAxisMinimum(-20f);
-            //yAxisLeft.setAxisMaximum(50);
+            yAxisLeft.setAxisMinimum(-50f);
             yAxisLeft.setAxisMaximum(50f);
             yAxisLeft.setTextSize(14);
             yAxisLeft.setDrawGridLines(true);
             yAxisLeft.setGridLineWidth((float) 0.5);
             yAxisLeft.enableGridDashedLine(20,20,20);
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                yAxisLeft.setLabelCount(100);
+            }
 
             yAxisRight.setDrawGridLines(false);
             yAxisRight.enableAxisLineDashedLine(20,20,20);
@@ -188,6 +194,7 @@ public class LineChartActivity extends AppCompatActivity {
             lineChart.setBackgroundColor(Color.WHITE);
             lineChart.setExtraOffsets(5,20,20,50);
             //lineChart.setVisibleXRange((float) 1, (float) 1);
+            //lineChart.setVisibleXRangeMaximum(5);
 
             lineChart.invalidate(); // Refresh del LineChart
         }
