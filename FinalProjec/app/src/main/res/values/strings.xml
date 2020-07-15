@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Categorie</string>
-    <string name="categories">categories</string>
+    <string name="btnGoToCategories">Go To Categories </string>
 </resources>

@@ -6,5 +6,5 @@
     <dimen name="tvCategoryTextSize">16dp</dimen>
     <dimen name="gvCategoriesColumnWidth">205dp</dimen>
     <dimen name="gvCategoriesVerticalSpacing">16dp</dimen>
-    <dimen name="tvTextSize">18</dimen>
+    <dimen name="tvTextSize">18sp</dimen>
 </resources>

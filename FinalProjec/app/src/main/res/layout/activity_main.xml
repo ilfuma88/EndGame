@@ -7,10 +7,10 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btnCategories"
-        android:layout_width="match_parent"
+        android:id="@+id/btnGoToCategories"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/categories"
+        android:text="@string/btnGoToCategories"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

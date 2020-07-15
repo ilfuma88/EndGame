@@ -44,65 +44,6 @@ public class ShopActivity extends AppCompatActivity {
         db = Room.databaseBuilder(getApplicationContext(), AppShopDatabase.class, "shop.db").allowMainThreadQueries().build();
     }
 
-    abstract class VolleyShop implements Response.ErrorListener, Response.Listener<String> {
-        abstract void fill(List<Shop> snt);
-
-        void searchShopsByCategoryId(String id) {
-            String url = "https://my-json-server.typicode.com/fabiobf96/SimpleJson/shops?categoryId=%s";
-            url = String.format(url, id);
-            apiCall(url);
-        }
-
-        private void apiCall(String url) {
-            RequestQueue requestQueue;
-            requestQueue = Volley.newRequestQueue(ShopActivity.this);
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, this, this);
-            requestQueue.add(stringRequest);
-        }
-        private void imgCall(String url) {
-            RequestQueue requestQueue;
-            requestQueue = Volley.newRequestQueue(ShopActivity.this);
-            ImageRequest stringRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
-                @Override
-                public void onResponse(Bitmap response) {
-                    // TO DO
-                }
-            }, 0, 0,
-                    ImageView.ScaleType.CENTER_CROP,
-                    Bitmap.Config.RGB_565,
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // TO DO
-                        }
-                    });
-            requestQueue.add(stringRequest);
-        }
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            // TO DO
-        }
-
-        @Override
-        public void onResponse(String response) {
-            Gson gson = new Gson();
-            String shops;
-            try {
-                JSONObject jsonObject = new JSONObject(response);
-                shops = jsonObject.getJSONObject("").toString();
-                Type listView = new TypeToken<List<Shop>>() {}.getType();
-                List<Shop> snt = gson.fromJson(shops, listView);
-                if (snt != null && snt.size() > 0) {
-                    Log.w("CA", "" + snt.size());
-                    db.shopDAO().insertAll(snt);
-                    fill(snt);
-                }
-            } catch (Exception e) {
-                //TO DO
-            }
-        }
-    }
     public class Holder{
         Intent intent;
         VolleyShop volleyShop;
@@ -112,7 +53,7 @@ public class ShopActivity extends AppCompatActivity {
             intent = getIntent();
             int i = intent.getIntExtra("categoryId", -1);
             if (i>-1){
-                this.volleyShop = new VolleyShop() {
+                this.volleyShop = new VolleyShop(ShopActivity.this, db) {
                     @Override
                     void fill(List<Shop> snt) {
                         Log.w("CA", "fill");
