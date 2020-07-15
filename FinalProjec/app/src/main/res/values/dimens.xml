@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cvCategoryWidth">188dp</dimen>
+    <dimen name="cvCategoryHeight">116dp</dimen>
+    <dimen name="cvCategoryRadius">30dp</dimen>
+    <dimen name="tvCategoryTextSize">16dp</dimen>
+    <dimen name="gvCategoriesColumnWidth">205dp</dimen>
+    <dimen name="gvCategoriesVerticalSpacing">16dp</dimen>
+    <dimen name="tvTextSize">18</dimen>
+</resources>
