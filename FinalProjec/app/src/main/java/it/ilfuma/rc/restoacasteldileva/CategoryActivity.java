@@ -8,7 +8,7 @@ import android.widget.GridView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Category extends AppCompatActivity{
+public class CategoryActivity extends AppCompatActivity{
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -34,7 +34,7 @@ public class Category extends AppCompatActivity{
 
                 gvCategories = findViewById(R.id.gvCategories);
 
-                CategoryAdapter categoryAdapter = new CategoryAdapter(Category.this, textCategorie, imgCategorie);
+                CategoryAdapter categoryAdapter = new CategoryAdapter(CategoryActivity.this, textCategorie, imgCategorie);
                 gvCategories.setAdapter(categoryAdapter);
 
                 gvCategories.setOnItemClickListener(this);
@@ -42,7 +42,7 @@ public class Category extends AppCompatActivity{
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l){
-                Intent intent = new Intent(Category.this, ShopActivity.class);
+                Intent intent = new Intent(CategoryActivity.this, ShopActivity.class);
                 intent.putExtra("categoryId", position +1);
                 startActivity(intent);
             }
