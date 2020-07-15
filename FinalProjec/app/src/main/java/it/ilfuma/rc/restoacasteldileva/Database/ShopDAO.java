@@ -12,6 +12,7 @@ import java.util.List;
 public interface ShopDAO {
     @Query("SELECT * FROM shop WHERE categoryId IN (:id)")
     List<Shop> loadAllById(int id);
+    //Sopra come parametro non è da mettere (int[] ids) ????
 
     @Query("SELECT count(*) FROM shop")
     int size();
