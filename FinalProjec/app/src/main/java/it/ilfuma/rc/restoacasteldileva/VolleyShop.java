@@ -22,14 +22,14 @@ import it.ilfuma.rc.restoacasteldileva.Database.AppShopDatabase;
 import it.ilfuma.rc.restoacasteldileva.Database.Shop;
 
 abstract class VolleyShop implements Response.ErrorListener, Response.Listener<String> {
-    abstract void fill(List<Shop> snt);
     private Context mContext;
     private AppShopDatabase mDB;
-
     VolleyShop(Context context, AppShopDatabase db) {
         mContext = context;
         mDB = db;
     }
+
+    abstract void fill(List<Shop> snt);
 
     void searchShopsByCategoryId(String id) {
         String url = "https://my-json-server.typicode.com/fabiobf96/SimpleJson/shops?categoryId=%s";
@@ -43,6 +43,7 @@ abstract class VolleyShop implements Response.ErrorListener, Response.Listener<S
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, this, this);
         requestQueue.add(stringRequest);
     }
+
     private void imgCall(String url) {
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(mContext);
@@ -73,7 +74,8 @@ abstract class VolleyShop implements Response.ErrorListener, Response.Listener<S
         Gson gson = new Gson();
         String shops = response.replaceAll("\n", "");
         try {
-            Type listView = new TypeToken<List<Shop>>() {}.getType();
+            Type listView = new TypeToken<List<Shop>>() {
+            }.getType();
             List<Shop> snt = gson.fromJson(shops, listView);
             if (snt != null && snt.size() > 0) {
                 Log.w("CA", "" + snt.size());
