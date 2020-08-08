@@ -1,6 +1,9 @@
 package it.ilfuma.rc.restoacasteldileva;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -9,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.ilfuma.rc.restoacasteldileva.Database.AppShopDatabase;
@@ -36,7 +40,9 @@ public class ShopActivity extends AppCompatActivity {
         Intent intent;
         VolleyShop volleyShop;
         RecyclerView rvShop;
+        Context context;
         Holder() {
+            context = getApplicationContext();
             rvShop = findViewById(R.id.rvShop);
             intent = getIntent();
             int i = intent.getIntExtra("categoryId", -1);
@@ -51,7 +57,7 @@ public class ShopActivity extends AppCompatActivity {
                     private void fillList(List<Shop> snt) {
                         mLayoutManager = new LinearLayoutManager(ShopActivity.this);
                         rvShop.setLayoutManager(mLayoutManager);
-                        mShopAdapter = new ShopAdapter(snt);
+                        mShopAdapter = new ShopAdapter(snt, context);
                         rvShop.setAdapter(mShopAdapter);
 
                         mShopAdapter.setOnItemClickListener(ShopActivity.Holder.this);

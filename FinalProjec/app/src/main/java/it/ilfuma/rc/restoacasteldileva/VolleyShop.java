@@ -44,26 +44,6 @@ abstract class VolleyShop implements Response.ErrorListener, Response.Listener<S
         requestQueue.add(stringRequest);
     }
 
-    public void imgCall(String url) {
-        RequestQueue requestQueue;
-        requestQueue = Volley.newRequestQueue(mContext);
-        ImageRequest stringRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap response) {
-                // TO DO
-            }
-        }, 0, 0,
-                ImageView.ScaleType.CENTER_CROP,
-                Bitmap.Config.RGB_565,
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TO DO
-                    }
-                });
-        requestQueue.add(stringRequest);
-    }
-
     @Override
     public void onErrorResponse(VolleyError error) {
         // TO DO
