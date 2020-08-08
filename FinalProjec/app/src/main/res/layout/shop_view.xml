@@ -6,6 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/ivShopLogo"
+        android:layout_width="@dimen/ivLogoWidth"
+        android:layout_height="@dimen/ivLogoHeight"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvShopDesctiption"
+        app:layout_constraintEnd_toStartOf="@+id/tvShopName"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <TextView
         android:id="@+id/tvShopName"
         android:layout_width="wrap_content"
@@ -16,6 +30,7 @@
         android:textSize="@dimen/tvTextSize"
         app:layout_constraintBottom_toTopOf="@+id/tvShopDesctiption"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.669"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

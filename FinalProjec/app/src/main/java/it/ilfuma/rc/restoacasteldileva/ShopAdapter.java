@@ -3,6 +3,7 @@ package it.ilfuma.rc.restoacasteldileva;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,10 +54,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvShopName, tvShopDesctiption;
+        private ImageView ivShopLogo;
         public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             tvShopName = itemView.findViewById(R.id.tvShopName);
             tvShopDesctiption = itemView.findViewById(R.id.tvShopDesctiption);
+            ivShopLogo = itemView.findViewById(R.id.ivShopLogo);
             itemView.setOnClickListener(this);
         }
 

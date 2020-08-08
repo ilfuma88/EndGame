@@ -31,7 +31,7 @@ abstract class VolleyShop implements Response.ErrorListener, Response.Listener<S
 
     abstract void fill(List<Shop> snt);
 
-    void searchShopsByCategoryId(String id) {
+    public void searchShopsByCategoryId(String id) {
         String url = "https://my-json-server.typicode.com/fabiobf96/SimpleJson/shops?categoryId=%s";
         url = String.format(url, id);
         apiCall(url);
@@ -44,7 +44,7 @@ abstract class VolleyShop implements Response.ErrorListener, Response.Listener<S
         requestQueue.add(stringRequest);
     }
 
-    private void imgCall(String url) {
+    public void imgCall(String url) {
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(mContext);
         ImageRequest stringRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {

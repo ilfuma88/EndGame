@@ -7,4 +7,6 @@
     <dimen name="gvCategoriesColumnWidth">205dp</dimen>
     <dimen name="gvCategoriesVerticalSpacing">16dp</dimen>
     <dimen name="tvTextSize">18sp</dimen>
+    <dimen name="ivLogoWidth">100dp</dimen>
+    <dimen name="ivLogoHeight">50dp</dimen>
 </resources>
