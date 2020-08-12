@@ -62,7 +62,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         ImageRequest stringRequest = new ImageRequest(mShops.get(position).shopLogo, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
-                holder.ivShopLogo.setImageBitmap(response);
+                holder.ivShopLogo.setImageBitmap(response
+                );
             }
         }, 0, 0,
                 ImageView.ScaleType.CENTER_CROP,
