@@ -1,8 +1,10 @@
 package it.ilfuma.rc.restoacasteldileva.Database;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.RequiresApi;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -26,6 +28,18 @@ public class Shop implements Parcelable {
     public String shopPosition;
     @ColumnInfo(name = "shopLogo")
     public String shopLogo;
+    @ColumnInfo(name = "discount10")
+    public String discount10;
+    @ColumnInfo(name = "condition10" )
+    public String condition10;
+    @ColumnInfo(name = "complimentaryService")
+    public String complimentaryService;
+    @ColumnInfo(name = "conditionComplimentary")
+    public String conditionComplimentary;
+    @ColumnInfo(name = "specialPackage")
+    public String specialPackage;
+    @ColumnInfo(name = "conditionSpecial")
+    public String conditionSpecial;
 
     @Override
     public int describeContents() {
@@ -54,12 +68,19 @@ public class Shop implements Parcelable {
         parcel.writeString(shopNumber2);
         parcel.writeString(shopPosition);
         parcel.writeString(shopLogo);
+        parcel.writeString(discount10);
+        parcel.writeString(condition10);
+        parcel.writeString(complimentaryService);
+        parcel.writeString(conditionComplimentary);
+        parcel.writeString(specialPackage);
+        parcel.writeString(conditionSpecial);
     }
 
     public Shop(){
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     private Shop(Parcel in){
         categoryId = in.readInt();
         shopName = in.readString();
@@ -69,5 +90,11 @@ public class Shop implements Parcelable {
         shopNumber2 = in.readString();
         shopPosition = in.readString();
         shopLogo = in.readString();
+        discount10 = in.readString();
+        condition10 = in.readString();
+        complimentaryService = in.readString();
+        conditionComplimentary = in.readString();
+        specialPackage = in.readString();
+        conditionSpecial = in.readString();
     }
 }
