@@ -13,7 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvShopDesctiption"
+        app:layout_constraintBottom_toTopOf="@+id/tvShopDescription"
         app:layout_constraintEnd_toStartOf="@+id/tvShopName"
         app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,14 +28,14 @@
         android:layout_marginBottom="8dp"
         android:text="TextView"
         android:textSize="@dimen/tvTextSize"
-        app:layout_constraintBottom_toTopOf="@+id/tvShopDesctiption"
+        app:layout_constraintBottom_toTopOf="@+id/tvShopDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.669"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvShopDesctiption"
+        android:id="@+id/tvShopDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CategoryActivity"/>
+        <activity android:name=".ShopsActivity"/>
         <activity android:name=".ShopActivity"/>
     </application>
 

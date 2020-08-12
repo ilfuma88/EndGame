@@ -9,4 +9,5 @@
     <dimen name="tvTextSize">18sp</dimen>
     <dimen name="ivLogoWidth">100dp</dimen>
     <dimen name="ivLogoHeight">50dp</dimen>
+    <dimen name="ivLogoShopHeight">150dp</dimen>
 </resources>

@@ -1,7 +1,5 @@
 package it.ilfuma.rc.restoacasteldileva;
 
-import android.app.Application;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -20,14 +18,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import it.ilfuma.rc.restoacasteldileva.Database.Shop;
 
-public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
+public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> {
     private List<Shop> mShops;
-    private int shop_view = R.layout.shop_view;
+    private int mInflateView;
     private OnItemClickListener mListener;
     private Context mContext;
 
@@ -39,17 +36,20 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         mListener = listener;
     }
 
-    public void changeText(String text, int position){
-        mShops.get(position).shopName = text;
+    public Shop getShop(int position){
+        return mShops.get(position);
     }
-    public ShopAdapter(List<Shop> shops, Context context){
+
+    public ShopsAdapter(List<Shop> shops, Context context, int inflateView){
         mShops = shops;
         mContext = context;
+        mInflateView = inflateView;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = (ConstraintLayout) LayoutInflater.from(parent.getContext()).inflate(shop_view, parent, false);
+        View view = (ConstraintLayout) LayoutInflater.from(parent.getContext()).inflate(mInflateView, parent, false);
         ViewHolder viewHolder = new ViewHolder(view, mListener);
         return viewHolder;
     }
@@ -57,13 +57,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.tvShopName.setText(mShops.get(position).shopName);
-        holder.tvShopDesctiption.setText(mShops.get(position).shopDescription);
+        holder.tvShopDescription.setText(mShops.get(position).shopDescription);
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
         ImageRequest stringRequest = new ImageRequest(mShops.get(position).shopLogo, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
-                holder.ivShopLogo.setImageBitmap(response
-                );
+                holder.ivShopLogo.setImageBitmap(response);
             }
         }, 0, 0,
                 ImageView.ScaleType.CENTER_CROP,
@@ -83,12 +82,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView tvShopName, tvShopDesctiption;
+        private TextView tvShopName, tvShopDescription;
         private ImageView ivShopLogo;
         public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             tvShopName = itemView.findViewById(R.id.tvShopName);
-            tvShopDesctiption = itemView.findViewById(R.id.tvShopDesctiption);
+            tvShopDescription = itemView.findViewById(R.id.tvShopDescription);
             ivShopLogo = itemView.findViewById(R.id.ivShopLogo);
 
             itemView.setOnClickListener(this);

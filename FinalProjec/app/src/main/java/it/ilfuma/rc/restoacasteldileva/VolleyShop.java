@@ -24,9 +24,14 @@ import it.ilfuma.rc.restoacasteldileva.Database.Shop;
 abstract class VolleyShop implements Response.ErrorListener, Response.Listener<String> {
     private Context mContext;
     private AppShopDatabase mDB;
+
     VolleyShop(Context context, AppShopDatabase db) {
         mContext = context;
         mDB = db;
+    }
+
+    VolleyShop(Context context){
+        mContext = context;
     }
 
     abstract void fill(List<Shop> snt);
