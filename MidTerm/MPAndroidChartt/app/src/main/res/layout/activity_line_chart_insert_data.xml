@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/sfondo_chart"
     app:layout_constraintBottom_toBottomOf="parent"
-    tools:context=".LineChartInsertDataActivity">
+    tools:context=".activities.LineChartInsertDataActivity">
 
     <Button
         android:id="@+id/btnCreateLineChart"

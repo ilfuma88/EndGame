@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btn_pieChart">Grafico a Torta</string>
+    <string name="btn_lineChart">Grafico a Linea</string>
+    <string name="tvLineChart_title">GRAFICO A LINEA</string>
+    <string name="btn_barChart">Grafico a Barra</string>
+    <string name="btn_radarChart">Grafico a Radar</string>
+    <string name="invalid_pieChart_input_toast">Formato non valido</string>
+    <string name="tst_no_label">Nessuna etichetta inserita</string>
+    <string name="tst_no_value">Nessun valore inserito</string>
+    <string name="r_btn_values">Valori</string>
+    <string name="r_btn_percent">Valori percentuale</string>
+    <string name="btn_changeCenterText">Cambia il Testo Centrale</string>
+    <string name="tv_create_pieChart">Inserisci un nuovo dato e crea il tuo Grafico a Torta</string>
+    <string name="btn_new_data">Nuovo dato</string>
+    <string name="btn_add_data">Aggiungi dato</string>
+    <string name="btn_create_chart">Crea il Grafico</string>
+    <string name="et_label_hint">Etichetta</string>
+    <string name="et_hour_hint">Ora</string>
+    <string name="et_temperature_hint">Temperatura</string>
+    <string name="et_value_hint">Valore</string>
+    <string name="et_label_data_hint">Eitchetta dato</string>
+    <string name="btn_add_label">Aggiungi etichetta</string>
+    <string name="et_axis_label">Etichetta degli assi</string>
+    <string name="et_data_set_hint">Aggiungi nome dataset</string>
+    <string name="toast_insert_an_hour_greater_than_previous_one">Inserisci un\'ora maggiore della precedente inserita!</string>
+    <string name="toast_insert_hour_between_0_23">Ora non valida! Inserisci un\'ora compresa tra 0 -:- 23!</string>
+    <string name="toast_insert_an_hour">Inserisci un\'Ora!</string>
+    <string name="toast_insert_a_temperature">Inserisci una Temperatura!</string>
+    <string name="toast_insert_hour_and_temperature">Inserisci un\'Ora e una Temperatura!</string>
+    <string name="text_tvLineHourData">"Ora: "</string>
+    <string name="text_tvLineTemperatureData">"Temperatura: "</string>
+    <string name="text_LineChart_Temperature_label_legend">Andamento temperatura</string>
+    <string name="text_LineChart_Chart_Title">Grafico a Linea della Temperatura</string>
+</resources>

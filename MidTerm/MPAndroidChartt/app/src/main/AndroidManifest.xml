@@ -9,22 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LineChartActivity"></activity>
-        <activity android:name=".LineChartInsertDataActivity" />
-        <activity android:name=".PieChartInsertDataActivity" />
-        <activity android:name=".BarChartActivity" />
-        <activity android:name=".RadarChartInsertDataActivity" />
-        <activity android:name=".BarchartInsertDataActivity" />
-        <activity android:name=".PieChartActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.LineChartActivity"></activity>
+        <activity android:name=".activities.LineChartInsertDataActivity" />
+        <activity android:name=".activities.PieChartInsertDataActivity" />
+        <activity android:name=".activities.BarChartActivity" />
+        <activity android:name=".activities.RadarChartInsertDataActivity" />
+        <activity android:name=".activities.BarchartInsertDataActivity" />
+        <activity android:name=".activities.PieChartActivity" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RadarChartInsertLabelActivity" />
-        <activity android:name=".RadarChartActivity" />
+        <activity android:name=".activities.RadarChartInsertLabelActivity" />
+        <activity android:name=".activities.RadarChartActivity" />
     </application>
 
 </manifest>

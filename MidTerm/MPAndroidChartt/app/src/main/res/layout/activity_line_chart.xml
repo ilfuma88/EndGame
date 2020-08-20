@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/sfondo_chart"
-    tools:context=".LineChartActivity">
+    tools:context=".activities.LineChartActivity">
 
     <TextView
         android:id="@+id/tvLineChartTitle"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MPAndroidChart</string>
+    <string name="app_name" translatable="false">MPAndroidChart</string>
     <string name="btn_pieChart"> PieChart</string>
     <string name="btn_lineChart">LineChart</string>
     <string name="tvLineChart_title">LINE CHART</string>
@@ -23,6 +23,15 @@
     <string name="btn_add_label">Add label</string>
     <string name="et_axis_label">Axis label</string>
     <string name="et_data_set_hint">Add dataset name</string>
+    <string name="toast_insert_an_hour_greater_than_previous_one">Insert an hour greater than the previous one!</string>
+    <string name="toast_insert_hour_between_0_23">No valid hour! Insert an hour between 0 -:- 23!</string>
+    <string name="toast_insert_an_hour">Insert an Hour!</string>
+    <string name="toast_insert_a_temperature">Insert a Temperature!</string>
+    <string name="toast_insert_hour_and_temperature">Insert an Hour and a Temperature!</string>
+    <string name="text_tvLineHourData">Hour: </string>
+    <string name="text_tvLineTemperatureData">Temperature: </string>
+    <string name="text_LineChart_Temperature_label_legend">Temperature trend</string>
+    <string name="text_LineChart_Chart_Title">Temperature LineChart</string>
 
 </resources>
 
