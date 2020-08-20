@@ -5,7 +5,7 @@
  * temperatura di una giornata.
  */
 
-package it.flaviamagnoni.mpandroidchart_t;
+package it.flaviamagnoni.mpandroidchart_t.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import it.flaviamagnoni.mpandroidchart_t.R;
 
 /**
  * L'Activity LineChartInsertDataActivity si occupa di gestire la fase di presa in input dei dati
@@ -131,21 +133,21 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
                             etlineDataHour.setText("");
                             etLineDataTemperature.setText("");
                         } else {
-                            Toast.makeText(context, "Insert an hour greater than the previous one!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, R.string.toast_insert_an_hour_greater_than_previous_one, Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(context, "No valid hour! Insert an hour between 0 -:- 23!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, R.string.toast_insert_hour_between_0_23, Toast.LENGTH_LONG).show();
                     }
                 } else {
                     if (!(hour.equals("") && temperature.equals(""))) {
                         if (hour.equals("")) {
-                            Toast.makeText(context, "Insert an Hour!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, R.string.toast_insert_an_hour, Toast.LENGTH_LONG).show();
                         }
                         if (temperature.equals("")) {
-                            Toast.makeText(context, "Insert a Temperature!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, R.string.toast_insert_a_temperature, Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(context, "Insert an Hour and a Temperature!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, R.string.toast_insert_hour_and_temperature, Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -207,8 +209,8 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
          */
         @Override
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-            viewHolder.tvLineHourData.setText("Hour: " + mHourDataset.get(position));   // Set del testo da mostrare nella TextView relativa alla label Hour
-            viewHolder.tvLineTemperatureData.setText("Temperature: " + mTemperatureDataset.get(position));  // Set del testo da mostrare nella TextView relativa al value Temperature
+            viewHolder.tvLineHourData.setText(getString(R.string.text_tvLineHourData) + mHourDataset.get(position));   // Set del testo da mostrare nella TextView relativa alla label Hour
+            viewHolder.tvLineTemperatureData.setText(getString(R.string.text_tvLineTemperatureData) + mTemperatureDataset.get(position));  // Set del testo da mostrare nella TextView relativa al value Temperature
         }
 
         /**

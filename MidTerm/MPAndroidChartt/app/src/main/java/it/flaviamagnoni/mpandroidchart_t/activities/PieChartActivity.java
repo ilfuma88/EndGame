@@ -1,4 +1,4 @@
-package it.flaviamagnoni.mpandroidchart_t;
+package it.flaviamagnoni.mpandroidchart_t.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,6 +14,8 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
+
+import it.flaviamagnoni.mpandroidchart_t.R;
 
 public class PieChartActivity extends AppCompatActivity {
 

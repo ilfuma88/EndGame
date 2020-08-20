@@ -1,4 +1,4 @@
-package it.flaviamagnoni.mpandroidchart_t;
+package it.flaviamagnoni.mpandroidchart_t.activities;
 
 import android.os.Parcel;
 import android.os.Parcelable;

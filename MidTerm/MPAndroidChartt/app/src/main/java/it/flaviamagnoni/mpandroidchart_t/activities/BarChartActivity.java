@@ -1,7 +1,7 @@
 /**
  * tutorial about  bar charts, and grouped Barcharts
  */
-package it.flaviamagnoni.mpandroidchart_t;
+package it.flaviamagnoni.mpandroidchart_t.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +17,8 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
+
+import it.flaviamagnoni.mpandroidchart_t.R;
 
 public class BarChartActivity extends AppCompatActivity {
     private static int singleBarChart = 1; //permette di scegliere che tipo di bar chart usare (1 single) (0 grouped)

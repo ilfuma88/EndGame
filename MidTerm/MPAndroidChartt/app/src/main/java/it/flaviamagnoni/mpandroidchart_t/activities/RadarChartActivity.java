@@ -1,4 +1,4 @@
-package it.flaviamagnoni.mpandroidchart_t;
+package it.flaviamagnoni.mpandroidchart_t.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,6 +14,8 @@ import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
+
+import it.flaviamagnoni.mpandroidchart_t.R;
 
 public class RadarChartActivity extends AppCompatActivity {
     private Intent intent;

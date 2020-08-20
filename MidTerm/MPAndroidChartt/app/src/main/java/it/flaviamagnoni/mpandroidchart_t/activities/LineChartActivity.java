@@ -4,7 +4,7 @@
  * chart e creare il relativo LineChart.
  */
 
-package it.flaviamagnoni.mpandroidchart_t;
+package it.flaviamagnoni.mpandroidchart_t.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -27,6 +27,8 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import it.flaviamagnoni.mpandroidchart_t.R;
 
 /**
  * L'Activity LineChartActivity si occupa della gestione dei dati raccolti (inseriti dall'utente
@@ -121,7 +123,7 @@ public class LineChartActivity extends AppCompatActivity {
             dataSet.setCircleRadius(5);
             dataSet.setCircleHoleColor(Color.YELLOW);
             dataSet.setCircleHoleRadius(3);
-            dataSet.setLabel("Temperature trend");
+            dataSet.setLabel(getString(R.string.text_LineChart_Temperature_label_legend));
             dataSet.setValueTextSize(12);
             dataSet.setValueTextColor(Color.BLUE);  // Styling
             dataSet.setMode(LineDataSet.Mode.LINEAR);
@@ -136,7 +138,7 @@ public class LineChartActivity extends AppCompatActivity {
         public void createChart(LineData lineData) {
             lineChart.setBackgroundColor(Color.WHITE);
             Description description = new Description();
-            description.setText("Temperature LineChart");
+            description.setText(getString(R.string.text_LineChart_Chart_Title));
             lineChart.setDescription(description);
 
             lineChart.setData(lineData);    // Setto il data object lineData nel chart
