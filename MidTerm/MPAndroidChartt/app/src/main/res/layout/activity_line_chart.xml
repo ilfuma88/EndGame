@@ -15,7 +15,7 @@
         android:background="@color/colBtnLineChart"
         android:fontFamily="sans-serif-black"
         android:padding="@dimen/tv_padding"
-        android:text="TextView"
+        android:text="@string/tvLineChart_title"
         android:textAlignment="center"
         android:textSize="@dimen/txt_size"
         app:layout_constraintEnd_toEndOf="parent"

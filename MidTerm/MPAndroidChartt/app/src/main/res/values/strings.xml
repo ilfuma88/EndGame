@@ -32,6 +32,8 @@
     <string name="text_tvLineTemperatureData">Temperature: </string>
     <string name="text_LineChart_Temperature_label_legend">Temperature trend</string>
     <string name="text_LineChart_Chart_Title">Temperature LineChart</string>
+    <string name="contentDescription_text_logo_ivTitle">Logo of MPAndroidChart</string>
+    <string name="contentDescription_text_ivDeleteLineChartData">Icon to delete</string>
 
 </resources>
 
