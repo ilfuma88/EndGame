@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             btnRadarChart.setOnClickListener(this);
             btnPieChart.setOnClickListener(this);
 
+            ivTitle.setImageDrawable(getDrawable(R.drawable.mpandroidchart));
             ivTitle.startAnimation(fadeIn);
             btnLineChart.startAnimation(transBtnSx);
             btnBarChart.startAnimation(transBtnDx);
