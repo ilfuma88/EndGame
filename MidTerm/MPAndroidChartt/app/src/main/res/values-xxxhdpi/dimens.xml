@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="txt_size">20sp</dimen>
+    <dimen name="dim_rv">274dp</dimen>
+    <dimen name="ic_delete">34dp</dimen>
+</resources>
