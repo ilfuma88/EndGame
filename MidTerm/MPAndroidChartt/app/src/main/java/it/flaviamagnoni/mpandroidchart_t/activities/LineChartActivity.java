@@ -14,7 +14,9 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -24,6 +26,8 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +85,7 @@ public class LineChartActivity extends AppCompatActivity {
      * @Author EndGame()
      * @Version 1.0
      */
-    class Holder {
+    class Holder implements OnChartGestureListener {
         private Context context;    // Rappresenta il contesto in cui l'Activity gira (LineChartActivity)
         private int orientation = getResources().getConfiguration().orientation;
         private int lineChartActivityColor = getColor(R.color.colBtnLineChart); // Colore che rappresenta il LineChart
@@ -108,8 +112,10 @@ public class LineChartActivity extends AppCompatActivity {
             tvLineChartTitle.setBackgroundColor(lineChartActivityColor);
 
             lineChart = findViewById(R.id.lineChart);
+            lineChart.setOnChartGestureListener(this);  // Imposto il Listener di gestures sul chart
 
             legend = lineChart.getLegend();
+            lineChart.setDoubleTapToZoomEnabled(false); // Disabilito lo zoom tramite il doppio tap
         }
 
         /**
@@ -137,9 +143,16 @@ public class LineChartActivity extends AppCompatActivity {
          */
         public void createChart(LineData lineData) {
             lineChart.setBackgroundColor(Color.WHITE);
-            Description description = new Description();
-            description.setText(getString(R.string.text_LineChart_Chart_Title));
-            lineChart.setDescription(description);
+            //Description description = new Description();
+            //lineChart.setDescription(description);
+            Description description = lineChart.getDescription();
+            description.setEnabled(true);   // enable/disable description
+            description.setText(getString(R.string.text_LineChart_Chart_Title));    // imposta il testo della descrizione
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                description.setPosition(650f, 50f);  // imposta la posizione della descrizione sullo schermo portrait
+            } else {
+                description.setPosition(1000f, 50f);  // imposta la posizione della descrizione sullo schermo landscape
+            }
 
             lineChart.setData(lineData);    // Setto il data object lineData nel chart
 
@@ -199,6 +212,46 @@ public class LineChartActivity extends AppCompatActivity {
             //lineChart.setVisibleXRangeMaximum(5);
 
             lineChart.invalidate(); // Refresh del LineChart
+        }
+
+        @Override
+        public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+        }
+
+        @Override
+        public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+        }
+
+        @Override
+        public void onChartLongPressed(MotionEvent me) {
+            Toast.makeText(context, "LongPressed", Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onChartDoubleTapped(MotionEvent me) {
+
+        }
+
+        @Override
+        public void onChartSingleTapped(MotionEvent me) {
+
+        }
+
+        @Override
+        public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+
+        }
+
+        @Override
+        public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+
+        }
+
+        @Override
+        public void onChartTranslate(MotionEvent me, float dX, float dY) {
+
         }
     }
 }

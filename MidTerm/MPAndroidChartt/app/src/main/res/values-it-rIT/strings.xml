@@ -34,4 +34,19 @@
     <string name="text_LineChart_Chart_Title">Grafico a Linea della Temperatura</string>
     <string name="contentDescription_text_logo_ivTitle">Logo di MPAndroidChart</string>
     <string name="contentDescription_text_ivDeleteLineChartData">Icona per eliminare</string>
+    <string name="text_about_us_title">Riguardo a noi</string>
+    <string name="text_tvMemberOne">Membro 1</string>
+    <string name="text_ivGabrieleAnselmi_contentDescription">Profilo di Gabriele Anselmi</string>
+    <string name="text_tvMemberTwo">Membro 2</string>
+    <string name="text_ivFabioBarchiesi_contentDescription">Profilo di Fabio Barchiesi</string>
+    <string name="text_tvMemberThree">Membro 3</string>
+    <string name="text_ivRiccardoConti_contentDescription">Profilo di Riccardo Conti</string>
+    <string name="text_tvGroupSHead">Capogruppo</string>
+    <string name="text_ivFlaviaMagnoni_contentDescription">Profilo di Flavia Magnoni</string>
+    <string name="text_tvContacts">Contatti</string>
+    <string name="text_tvEmailLabel">E-mail (Capogruppo)</string>
+    <string name="text_ibtnGithub_contentDescription">ImageButton per visitare il progetto su Github</string>
+    <string name="text_tvPresentation">Noi siamo EndGame()! Noi abbiamo realizzato l\'App \"MPAndroidChart Demo\"! Membri... assemble!</string>
+    <string name="text_mnuAppInfo">Info dell\'App</string>
+    <string name="text_mnuGithub">Vedi MPAndroidChart su Github</string>
 </resources>

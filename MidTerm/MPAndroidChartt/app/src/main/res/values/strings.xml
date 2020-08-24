@@ -34,6 +34,27 @@
     <string name="text_LineChart_Chart_Title">Temperature LineChart</string>
     <string name="contentDescription_text_logo_ivTitle">Logo of MPAndroidChart</string>
     <string name="contentDescription_text_ivDeleteLineChartData">Icon to delete</string>
+    <string name="text_tvEndgame" translatable="false">ENDGAME()</string>
+    <string name="text_about_us_title">About Us</string>
+    <string name="text_tvMemberOne">Member 1</string>
+    <string name="text_tvGabrieleAnselmi" translatable="false">Gabriele Anselmi</string>
+    <string name="text_ivGabrieleAnselmi_contentDescription">Gabriele Anselmi profile</string>
+    <string name="text_tvMemberTwo">Member 2</string>
+    <string name="text_ivFabioBarchiesi_contentDescription">Fabio Barchiesi profile</string>
+    <string name="text_tvFabioBarchiesi" translatable="false">Fabio Barchiesi</string>
+    <string name="text_tvMemberThree">Member 3</string>
+    <string name="text_ivRiccardoConti_contentDescription">Riccardo Conti profile</string>
+    <string name="text_tvRiccardoConti" translatable="false">Riccardo Conti</string>
+    <string name="text_tvGroupSHead">Group\'s Head</string>
+    <string name="text_ivFlaviaMagnoni_contentDescription">Flavia Magnoni profile</string>
+    <string name="text_tvFlaviaMagnoni" translatable="false">Flavia Magnoni</string>
+    <string name="text_tvContacts">Contacts</string>
+    <string name="text_tvEmailLabel">Group\'s Head E-mail:</string>
+    <string name="text_email_tvEmailAddress" translatable="false">flavia.magnoni@students.uniroma2.eu</string>
+    <string name="text_ibtnGithub_contentDescription">ImageButton to go to Github project</string>
+    <string name="text_tvPresentation">We are EndGame()! We realized \"MPAndroidChart Demo\" App! Members... assemble!</string>
+    <string name="text_mnuAppInfo">App Info</string>
+    <string name="text_mnuGithub">View MPAndroidChart on Github</string>
 
 </resources>
 
