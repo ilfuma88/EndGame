@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mnuGoToGithub"
+        android:title="View MPAndroidChart on Github"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mnuLineChartInfo"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="Info"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/mnuSavePicture"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="Save Picture"
+        app:showAsAction="ifRoom|withText" />
+</menu>

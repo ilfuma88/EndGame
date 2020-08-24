@@ -1,10 +1,15 @@
 package it.flaviamagnoni.mpandroidchart_t.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -20,6 +25,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new Holder();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mnuAboutUs:
+                Intent intentAboutUs = new Intent(MainActivity.this, AboutUsActivity.class);
+                startActivity(intentAboutUs);
+                return true;
+            case R.id.mnuAppInfo:
+                //Intent intentAppInfo = new Intent(this, AppInfo.class);
+                //startActivity(intentAppInfo);
+                return true;
+            case R.id.mnuGithub:
+                Intent intentGithub = new Intent(Intent.ACTION_VIEW);
+                intentGithub.setData(Uri.parse("https://github.com/PhilJay/MPAndroidChart"));
+                startActivity(intentGithub);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     class Holder implements View.OnClickListener{

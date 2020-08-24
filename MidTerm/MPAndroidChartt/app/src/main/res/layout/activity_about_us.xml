@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clAboutUs"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sfondo_chart"
+    tools:context=".activities.AboutUsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvPresentation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_distance"
+                android:layout_marginTop="@dimen/margin_distance"
+                android:layout_marginEnd="@dimen/margin_distance"
+                android:background="#D5FBFAFA"
+                android:padding="@dimen/tv_padding_small"
+                android:text="@string/text_tvPresentation"
+                android:textSize="@dimen/txt_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvFlaviaMagnoni" />
+
+            <TextView
+                android:id="@+id/tvEmailLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_distance"
+                android:layout_marginTop="@dimen/margin_distance"
+                android:background="#D5FBFAFA"
+                android:padding="@dimen/tv_padding_small"
+                android:text="@string/text_tvEmailLabel"
+                android:textSize="@dimen/txt_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvContacts" />
+
+            <ImageView
+                android:id="@+id/ivRiccardoConti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/text_ivRiccardoConti_contentDescription"
+                app:layout_constraintStart_toStartOf="@+id/ivGabrieleAnselmi"
+                app:layout_constraintTop_toBottomOf="@+id/tvMembreThree"
+                app:srcCompat="@drawable/riccardo_conti" />
+
+            <TextView
+                android:id="@+id/tvGabrieleAnselmi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#D5FBFAFA"
+                android:padding="@dimen/tv_padding_small"
+                android:text="@string/text_tvGabrieleAnselmi"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/ivGabrieleAnselmi"
+                app:layout_constraintStart_toStartOf="@+id/ivGabrieleAnselmi"
+                app:layout_constraintTop_toBottomOf="@+id/ivGabrieleAnselmi" />
+
+            <TextView
+                android:id="@+id/tvMembreThree"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_distance"
+                android:background="@color/colBtnBarChart"
+                android:text="@string/text_tvMemberThree"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/ivRiccardoConti"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/ivRiccardoConti"
+                app:layout_constraintTop_toBottomOf="@+id/tvGabrieleAnselmi" />
+
+            <TextView
+                android:id="@+id/tvEmailAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_distance"
+                android:layout_marginEnd="@dimen/margin_distance"
+                android:autoLink="email"
+                android:background="#D5FBFAFA"
+                android:padding="@dimen/tv_padding_small"
+                android:text="@string/text_email_tvEmailAddress"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvEmailLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvEmailLabel"
+                app:layout_constraintTop_toTopOf="@+id/tvEmailLabel" />
+
+            <TextView
+                android:id="@+id/tvRiccardoConti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#D5FBFAFA"
+                android:padding="@dimen/tv_padding_small"
+                android:text="@string/text_tvRiccardoConti"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/ivRiccardoConti"
+                app:layout_constraintStart_toStartOf="@+id/ivRiccardoConti"
+                app:layout_constraintTop_toBottomOf="@+id/ivRiccardoConti" />
+
+            <TextView
+                android:id="@+id/tvMemberOne"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_distance"
+                android:background="@color/colBtnLineChart"
+                android:text="@string/text_tvMemberOne"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/ivGabrieleAnselmi"
+                app:layout_constraintStart_toStartOf="@+id/ivGabrieleAnselmi"
+                app:layout_constraintTop_toBottomOf="@+id/tvEndgame" />
+
+            <ImageView
+                android:id="@+id/ivFlaviaMagnoni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/text_ivFlaviaMagnoni_contentDescription"
+                app:layout_constraintEnd_toEndOf="@+id/ivFabioBarchiesi"
+                app:layout_constraintTop_toBottomOf="@+id/tvGroupSHead"
+                app:srcCompat="@drawable/flavia_magnoni" />
+
+            <ImageButton
+                android:id="@+id/ibtnGithub"
+                style="@android:style/Widget.Holo.Light.ImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_distance"
+                android:layout_marginTop="@dimen/margin_distance"
+                android:background="#D5FBFAFA"
+                android:contentDescription="@string/text_ibtnGithub_contentDescription"
+                android:padding="@dimen/btn_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvEmailLabel"
+                app:srcCompat="@drawable/ic_github" />
+
+            <TextView
+                android:id="@+id/tvFabioBarchiesi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#D5FBFAFA"
+                android:padding="@dimen/tv_padding_small"
+                android:text="@string/text_tvFabioBarchiesi"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/ivFabioBarchiesi"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/ivFabioBarchiesi"
+                app:layout_constraintTop_toBottomOf="@+id/ivFabioBarchiesi" />
+
+            <ImageView
+                android:id="@+id/ivFabioBarchiesi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_right_medium"
+                android:contentDescription="@string/text_ivFabioBarchiesi_contentDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMemberTwo"
+                app:srcCompat="@drawable/fabio_barchiesi" />
+
+            <ImageView
+                android:id="@+id/ivGabrieleAnselmi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_left_medium"
+                android:contentDescription="@string/text_ivGabrieleAnselmi_contentDescription"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMemberOne"
+                app:srcCompat="@drawable/gabriele_anselmi" />
+
+            <TextView
+                android:id="@+id/tvMemberTwo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colBtnRadarChart"
+                android:text="@string/text_tvMemberTwo"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/ivFabioBarchiesi"
+                app:layout_constraintStart_toStartOf="@+id/ivFabioBarchiesi"
+                app:layout_constraintTop_toTopOf="@+id/tvMemberOne" />
+
+            <TextView
+                android:id="@+id/tvEndgame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_distance"
+                android:background="#17000000"
+                android:padding="@dimen/tv_padding_small"
+                android:text="@string/text_tvEndgame"
+                android:textSize="@dimen/txt_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvFlaviaMagnoni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#D5FBFAFA"
+                android:padding="@dimen/tv_padding_small"
+                android:text="@string/text_tvFlaviaMagnoni"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/ivFlaviaMagnoni"
+                app:layout_constraintStart_toStartOf="@+id/ivFlaviaMagnoni"
+                app:layout_constraintTop_toBottomOf="@+id/ivFlaviaMagnoni" />
+
+            <TextView
+                android:id="@+id/tvContacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_distance"
+                android:background="#17000000"
+                android:padding="@dimen/tv_padding_small"
+                android:text="@string/text_tvContacts"
+                android:textSize="@dimen/txt_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPresentation" />
+
+            <TextView
+                android:id="@+id/tvGroupSHead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colBtnPieChart"
+                android:text="@string/text_tvGroupSHead"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/ivFlaviaMagnoni"
+                app:layout_constraintStart_toStartOf="@+id/ivFlaviaMagnoni"
+                app:layout_constraintTop_toTopOf="@+id/tvMembreThree" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
