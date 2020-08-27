@@ -7,24 +7,33 @@
 
 package it.flaviamagnoni.mpandroidchart_t.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -43,6 +52,7 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
     private ArrayList<Integer> mHourDataset, mTemperatureDataset;    // Array di interi che contengono l'input dell'utente
     private Intent intent;
     private int latestHour; // Ultimo dato Label dell'array mHourDataset (Hour)
+    private int cntMnuAppInfo = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +68,36 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
         latestHour = -1;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mnuAboutUs:
+                Intent intentAboutUs = new Intent(LineChartInsertDataActivity.this, AboutUsActivity.class);
+                startActivity(intentAboutUs);
+                return true;
+            case R.id.mnuAppInfo:
+                if (cntMnuAppInfo == 0) {
+                    holder.showPopupWindow(R.id.mnuAppInfo);
+                    cntMnuAppInfo += 1;
+                }
+                return true;
+            case R.id.mnuGithub:
+                Intent intentGithub = new Intent(Intent.ACTION_VIEW);
+                intentGithub.setData(Uri.parse("https://github.com/PhilJay/MPAndroidChart"));
+                startActivity(intentGithub);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     /**
      * La classe Holder si occupa della gestione dell'interfaccia dell'Activity.
      * Utilizzo il paradigma Model view viewControl
@@ -65,7 +105,7 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
      * @Version 1.0
      */
     class Holder implements View.OnClickListener {
-        private Context context;    // Rappresenta il contesto in cui l'Activity gira (LineChartInsertDataActivity)
+        private Context mContext;    // Rappresenta il contesto in cui l'Activity gira (LineChartInsertDataActivity)
         private int lineChartcolor = getColor(R.color.colBtnLineChart);  // Colore che rappresenta il LineChart
 
         // Definizione delle View e ViewGroup che realizzano il Layout
@@ -79,13 +119,18 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
         private RecyclerView.LayoutManager layoutManager;
         private RecyclerView.Adapter mAdapter;  // si occupa della gestione delle viste ViewHolder della RecyclerView
 
+        // Per costruire il popup associato al click di "mnuAppInfo"
+        private ImageButton ibtnClosePopup;
+        private TextView tvPopupMain;
+        private PopupWindow mPopupWindow;
+
         /**
          * Holder(Context) è il costruttore. Qui vengono collegate le viste nel Layout
          * ("activity_line_chart_insert_data.xml) al codice Java.
          * @param context: Context. E' il contesto in cui gira l'activity, in questo caso la LineChartInsertDataActivity.
          */
         public Holder(Context context) {
-            this.context = context;
+            this.mContext = context;
             clLineChartInsertData = findViewById(R.id.clLineChartInsertData);
             clLineChartInsertData.setBackground(getDrawable(R.drawable.sfondo_chart));
 
@@ -111,6 +156,31 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
             btnCreateLineChart.setOnClickListener(this);
         }
 
+        public void showPopupWindow(int id) {
+            switch (id) {
+                case R.id.mnuAppInfo:
+                    btnAddLineChartData.setEnabled(false);
+                    btnCreateLineChart.setEnabled(false);
+                    LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);  // Inizializzo una nuova istanza del LayoutInflater service
+                    View popupAppInfo = inflater.inflate(R.layout.popup_mnu_app_info, null);    // Gonfio (inflate) il layout "popup_mnu_app_info" all'interno della View popupAppInfo
+
+                    mPopupWindow = new PopupWindow(popupAppInfo, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);   // Inizializzo una nuova istanza di una finestra popup
+
+                    // Imposto un valore di elevation per la finestra di popup (per API >= 21)
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        mPopupWindow.setElevation(5.0f);
+                    }
+
+                    mPopupWindow.showAtLocation(clLineChartInsertData, Gravity.CENTER, 0, 0);  // Visualizza la finestra di popup al centro del ConstraintLayout del root
+
+                    ibtnClosePopup = popupAppInfo.findViewById(R.id.ibtnClosePopup);
+                    ibtnClosePopup.setOnClickListener(this);
+                    tvPopupMain = popupAppInfo.findViewById(R.id.tvPopupMain);
+                    tvPopupMain.setText(R.string.text_tvPopupMain_insert_data_lineChart);
+                    break;
+            }
+        }
+
         /**
          * onClick() è l'evento associato al click di una View. Qui si gestisce il click del bottone
          * che aggiunge i dati inseriti dall'utente ai Dataset e alla RecyclerView, e il click
@@ -133,29 +203,35 @@ public class LineChartInsertDataActivity extends AppCompatActivity {
                             etlineDataHour.setText("");
                             etLineDataTemperature.setText("");
                         } else {
-                            Toast.makeText(context, R.string.toast_insert_an_hour_greater_than_previous_one, Toast.LENGTH_LONG).show();
+                            Toast.makeText(mContext, R.string.toast_insert_an_hour_greater_than_previous_one, Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(context, R.string.toast_insert_hour_between_0_23, Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, R.string.toast_insert_hour_between_0_23, Toast.LENGTH_LONG).show();
                     }
                 } else {
                     if (!(hour.equals("") && temperature.equals(""))) {
                         if (hour.equals("")) {
-                            Toast.makeText(context, R.string.toast_insert_an_hour, Toast.LENGTH_LONG).show();
+                            Toast.makeText(mContext, R.string.toast_insert_an_hour, Toast.LENGTH_LONG).show();
                         }
                         if (temperature.equals("")) {
-                            Toast.makeText(context, R.string.toast_insert_a_temperature, Toast.LENGTH_LONG).show();
+                            Toast.makeText(mContext, R.string.toast_insert_a_temperature, Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(context, R.string.toast_insert_hour_and_temperature, Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, R.string.toast_insert_hour_and_temperature, Toast.LENGTH_LONG).show();
                     }
                 }
             }
             if (v.getId() == R.id.btnCreateLineChart) {
-                Intent lineChartIntent = new Intent(context, LineChartActivity.class);  // Intent che lancia l'Activity LineChartActivity.class
+                Intent lineChartIntent = new Intent(mContext, LineChartActivity.class);  // Intent che lancia l'Activity LineChartActivity.class
                 lineChartIntent.putExtra("hourDataset", mHourDataset);  // Put dell'array di dati (mHourDataset) nel bundle dell'Intent
                 lineChartIntent.putExtra("temperatureDataset", mTemperatureDataset);    // Put dell'array di dati (mTemperatureDataset) nel bundle dell'Intent
                 startActivity(lineChartIntent); // Lancio l'Activity LineChartActivity.class che si occupa della creazione del chart
+            }
+            if (v.getId() == R.id.ibtnClosePopup) {
+                mPopupWindow.dismiss(); // Chiudo la finestra di popup
+                btnAddLineChartData.setEnabled(true);
+                btnCreateLineChart.setEnabled(true);
+                cntMnuAppInfo = 0;
             }
         }
 

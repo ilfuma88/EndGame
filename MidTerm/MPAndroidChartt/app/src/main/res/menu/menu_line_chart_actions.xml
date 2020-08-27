@@ -3,8 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/mnuGoToGithub"
-        android:title="View MPAndroidChart on Github"
+        android:id="@+id/mnuAboutUs"
+        android:title="@string/text_about_us_title"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mnuGithub"
+        android:title="@string/text_mnuGithub"
         app:showAsAction="never" />
     <item
         android:id="@+id/mnuLineChartInfo"

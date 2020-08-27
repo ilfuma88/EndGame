@@ -1,13 +1,13 @@
 package it.flaviamagnoni.mpandroidchart_t.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import it.flaviamagnoni.mpandroidchart_t.R;
 
@@ -25,18 +25,18 @@ public class AboutUsActivity extends AppCompatActivity {
 
     class Holder implements View.OnClickListener {
         private Context mContext;
-        private ImageButton ibtnGithub;
+        private ImageButton ibtnEndgameGithub;
 
         public Holder(Context context) {
             mContext = context;
 
-            ibtnGithub = findViewById(R.id.ibtnGithub);
-            ibtnGithub.setOnClickListener(this);
+            ibtnEndgameGithub = findViewById(R.id.ibtnEndGameGithub);
+            ibtnEndgameGithub.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.ibtnGithub) {
+            if (v.getId() == R.id.ibtnEndGameGithub) {
                 Intent intentGithub = new Intent(Intent.ACTION_VIEW);
                 intentGithub.setData(Uri.parse("https://github.com/ilfuma88/EndGame"));
                 startActivity(intentGithub);

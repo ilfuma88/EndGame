@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlPopupMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DAFFFFFF"
+    android:padding="@dimen/tv_padding">
+
+    <ImageButton
+        android:id="@+id/ibtnClosePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@null"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+    <TextView
+        android:id="@+id/tvPopupMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="#00FFFFFF"
+        android:padding="@dimen/tv_padding_large"
+        android:text="@string/text_tvPopupMain" />
+</RelativeLayout>

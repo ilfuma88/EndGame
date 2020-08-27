@@ -141,7 +141,7 @@
                 app:srcCompat="@drawable/flavia_magnoni" />
 
             <ImageButton
-                android:id="@+id/ibtnGithub"
+                android:id="@+id/ibtnEndGameGithub"
                 style="@android:style/Widget.Holo.Light.ImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

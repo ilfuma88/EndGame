@@ -52,9 +52,12 @@
     <string name="text_tvEmailLabel">Group\'s Head E-mail:</string>
     <string name="text_email_tvEmailAddress" translatable="false">flavia.magnoni@students.uniroma2.eu</string>
     <string name="text_ibtnGithub_contentDescription">ImageButton to go to Github project</string>
-    <string name="text_tvPresentation">We are EndGame()! We realized \"MPAndroidChart Demo\" App! Members... assemble!</string>
+    <string name="text_tvPresentation">We are EndGame()! We realized \"MPAndroidChart Demo\" App! Members… assemble!</string>
     <string name="text_mnuAppInfo">App Info</string>
     <string name="text_mnuGithub">View MPAndroidChart on Github</string>
+    <string name="text_tvPopupMain">"The app shows some examples of charts created using MPAndroidChart library."</string>
+    <string name="text_tvPopupMain_insert_data_lineChart">"Here you can insert your data to realize your LineChart. Insert an hour of the day with relative temperature, and then click "Add Data" button! This is only a simple demo, so it's permitted to insert only an hour greater than the previous one!"</string>
+    <string name="text_tvPopupLineChartInfo">"This is the Line Chart realized with you data. The chart shows the temperature trend of a day!"</string>
 
 </resources>
 

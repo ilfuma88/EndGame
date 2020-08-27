@@ -49,4 +49,7 @@
     <string name="text_tvPresentation">Noi siamo EndGame()! Noi abbiamo realizzato l\'App \"MPAndroidChart Demo\"! Membri… assemble!</string>
     <string name="text_mnuAppInfo">Info dell\'App</string>
     <string name="text_mnuGithub">Vedi MPAndroidChart su Github</string>
+    <string name="text_tvPopupMain">L\'app mostra alcuni esempi di grafici creati usando la libreria MPAndroidChart</string>
+    <string name="text_tvPopupMain_insert_data_lineChart">Qui puoi inserire i tuoi dati per realizzare il tuo Grafico a Linea. Inserisci un\'ora del giorno con la relativa temperatura, e poi clicca il bottone \"Aggiungi Dato\"! Questa è soltanto una semplice demo, così è permesso di inserire soltanto un\'ora maggiore di quella inserita precedentemente!</string>
+    <string name="text_tvPopupLineChartInfo">Questo è il Grafico a Linea realizzato con i tuoi dati. Il grafico mostra l\'andamento della temperatura di un giorno!</string>
 </resources>

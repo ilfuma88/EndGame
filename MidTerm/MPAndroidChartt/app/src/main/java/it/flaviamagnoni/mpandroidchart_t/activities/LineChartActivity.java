@@ -6,18 +6,35 @@
 
 package it.flaviamagnoni.mpandroidchart_t.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
@@ -28,6 +45,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +61,8 @@ import it.flaviamagnoni.mpandroidchart_t.R;
 public class LineChartActivity extends AppCompatActivity {
     private Holder holder;  // Gestore dell'interfaccia
     private ArrayList<Integer> hourDataset, temperatureDataset; // ArrayList di interi che contengono l'input, inserito dall'utente, e passato tramite Intent
+    private int cntMnuLineChartInfo = 0;
+    private static final int PERMISSION_STORAGE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +99,88 @@ public class LineChartActivity extends AppCompatActivity {
         holder.createChart(lineData);   // Chiamo il metodo dell'Holder che aggiorna e disegna il LineChart
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_line_chart_actions, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mnuAboutUs:
+                Intent intentAboutUs = new Intent(LineChartActivity.this, AboutUsActivity.class);
+                startActivity(intentAboutUs);
+                return true;
+            case R.id.mnuLineChartInfo:
+                if (cntMnuLineChartInfo == 0) {
+                    holder.showPopupWindow(R.id.mnuLineChartInfo);
+                    cntMnuLineChartInfo += 1;
+                }
+                return true;
+            case R.id.mnuGithub:
+                Intent intentGithub = new Intent(Intent.ACTION_VIEW);
+                intentGithub.setData(Uri.parse("https://github.com/PhilJay/MPAndroidChart"));
+                startActivity(intentGithub);
+                return true;
+            case R.id.mnuSavePicture:
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    saveToGallery(holder.lineChart, "LineChart");
+                } else {
+                    requestStoragePermission(holder.lineChart);
+                }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    protected void requestStoragePermission(View view) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Snackbar.make(view, "Write permission is required to save image to gallery", Snackbar.LENGTH_INDEFINITE)
+                    .setAction(android.R.string.ok, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ActivityCompat.requestPermissions(LineChartActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_STORAGE);
+                        }
+                    }).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Permission Required!", Toast.LENGTH_SHORT)
+                    .show();
+            ActivityCompat.requestPermissions(LineChartActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_STORAGE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_STORAGE) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //saveToGallery(holder.lineChart, "LineChart");
+                findViewById(R.id.mnuSavePicture).setEnabled(true);
+            } else {
+                Toast.makeText(getApplicationContext(), "Saving FAILED!", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
+    protected void saveToGallery(Chart chart, String name) {
+        if (chart.saveToGallery(name + "_" + System.currentTimeMillis(), 70))
+            Toast.makeText(getApplicationContext(), "Saving SUCCESSFUL!",
+                    Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getApplicationContext(), "Saving FAILED!", Toast.LENGTH_SHORT)
+                    .show();
+    }
+
     /**
      * La classe Holder si occupa della gestione dell'interfaccia dell'Activity.
      * Utilizzo il paradigma Model view viewControl
      * @Author EndGame()
      * @Version 1.0
      */
-    class Holder implements OnChartGestureListener {
-        private Context context;    // Rappresenta il contesto in cui l'Activity gira (LineChartActivity)
+    class Holder implements OnChartGestureListener, View.OnClickListener {
+        private Context mContext;    // Rappresenta il contesto in cui l'Activity gira (LineChartActivity)
         private int orientation = getResources().getConfiguration().orientation;
         private int lineChartActivityColor = getColor(R.color.colBtnLineChart); // Colore che rappresenta il LineChart
 
@@ -97,13 +191,18 @@ public class LineChartActivity extends AppCompatActivity {
         private LineChart lineChart;    // Questa View è il LineChart
         private Legend legend;
 
+        // Per costruire il popup associato al click di "mnuAppInfo"
+        private ImageButton ibtnClosePopup;
+        private TextView tvPopupLineChartInfo;
+        private PopupWindow mPopupWindow;
+
         /**
          * Holder(Context) è il costruttore. Qui vengono collegate le viste nel Layout
          * ("activity_line_chart.xml) al codice Java.
          * @param context: Context. E' il contesto in cui gira l'activity, in questo caso la LineChartActivity.
          */
         public Holder(Context context) {
-            this.context = context;
+            this.mContext = context;
 
             clLineChartActivity = findViewById(R.id.clLineChartActivity);
             clLineChartActivity.setBackground(getDrawable(R.drawable.sfondo_chart));
@@ -214,6 +313,31 @@ public class LineChartActivity extends AppCompatActivity {
             lineChart.invalidate(); // Refresh del LineChart
         }
 
+        public void showPopupWindow(int id) {
+            switch (id) {
+                case R.id.mnuLineChartInfo:
+                    lineChart.setEnabled(false);
+                    lineChart.setTouchEnabled(false);
+                    LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);  // Inizializzo una nuova istanza del LayoutInflater service
+                    View popupLineChartInfo = inflater.inflate(R.layout.popup_mnu_linechart_info, null);    // Gonfio (inflate) il layout "popup_mnu_app_info" all'interno della View popupLineChartInfo
+
+                    mPopupWindow = new PopupWindow(popupLineChartInfo, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);   // Inizializzo una nuova istanza di una finestra popup
+
+                    // Imposto un valore di elevation per la finestra di popup (per API >= 21)
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        mPopupWindow.setElevation(5.0f);
+                    }
+
+                    mPopupWindow.showAtLocation(clLineChartActivity, Gravity.CENTER, 0, 0);  // Visualizza la finestra di popup al centro del ConstraintLayout del root
+
+                    ibtnClosePopup = popupLineChartInfo.findViewById(R.id.ibtnClosePopup);
+                    ibtnClosePopup.setOnClickListener(this);
+                    tvPopupLineChartInfo = popupLineChartInfo.findViewById(R.id.tvPopupLineChartInfo);
+                    tvPopupLineChartInfo.setText(R.string.text_tvPopupLineChartInfo);
+                    break;
+            }
+        }
+
         @Override
         public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
 
@@ -226,7 +350,7 @@ public class LineChartActivity extends AppCompatActivity {
 
         @Override
         public void onChartLongPressed(MotionEvent me) {
-            Toast.makeText(context, "LongPressed", Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, "LongPressed", Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -252,6 +376,16 @@ public class LineChartActivity extends AppCompatActivity {
         @Override
         public void onChartTranslate(MotionEvent me, float dX, float dY) {
 
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.ibtnClosePopup) {
+                mPopupWindow.dismiss(); // Chiudo la finestra di popup
+                lineChart.setEnabled(true);
+                lineChart.setTouchEnabled(true);
+                cntMnuLineChartInfo = 0;
+            }
         }
     }
 }

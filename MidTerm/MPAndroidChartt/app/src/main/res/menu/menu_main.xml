@@ -8,10 +8,11 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/mnuAppInfo"
-        android:icon="@android:drawable/ic_dialog_info"
+        android:icon="@android:drawable/ic_menu_info_details"
         android:title="@string/text_mnuAppInfo"
         app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/mnuGithub"
-        android:title="@string/text_mnuGithub" />
+        android:title="@string/text_mnuGithub"
+        app:showAsAction="never" />
 </menu>
