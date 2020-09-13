@@ -1,6 +1,7 @@
 package it.flaviamagnoni.mpandroidchart_t.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -90,6 +92,8 @@ public class RadarChartInsertLabelActivity extends AppCompatActivity {
         private ImageButton ibtnClosePopup;
 
         private ConstraintLayout clRcInsertLabel;
+
+        private int mPosition;
 
 
         Holder(Context context) {
@@ -179,8 +183,32 @@ public class RadarChartInsertLabelActivity extends AppCompatActivity {
 
         @Override
         public void onDeleteItemClick(int position) {
-            mRadarChartLabelRows.remove(position);
-            mRadarChartAdapter.notifyItemRemoved(position);
+            mPosition = position;
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+            // Setting Dialog Title
+            alertDialog.setTitle("Confirm Delete?");
+            // Setting Dialog Message
+            alertDialog.setMessage("Are you sure you want delete this label?");
+            // Setting Icon to Dialog
+            alertDialog.setIcon(R.drawable.ic_delete);
+            // Setting Positive "Yes" Btn
+            alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    mRadarChartLabelRows.remove(mPosition);
+                    mRadarChartAdapter.notifyItemRemoved(mPosition);
+                }
+            });
+            // Setting Negative "NO" Btn
+            alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to execute after dialog
+                    Toast.makeText(getApplicationContext(), "You clicked on NO", Toast.LENGTH_SHORT).show();
+                    dialog.cancel();
+                }
+            });
+
+            alertDialog.show();
+
         }
     }
 
@@ -196,17 +224,17 @@ public class RadarChartInsertLabelActivity extends AppCompatActivity {
 
         public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             public TextView mTextViewInsertLabel;
-            public ImageView mImegeViewDelete;
+            public ImageView mImageViewDelete;
 
             public OnItemClickListener mListener;
 
             public ViewHolder(View itemView, OnItemClickListener listener) {
                 super(itemView);
                 mTextViewInsertLabel = itemView.findViewById(R.id.tvRadarChartLabel);
-                mImegeViewDelete = itemView.findViewById(R.id.ivRadarChartDelete);
+                mImageViewDelete = itemView.findViewById(R.id.ivRadarChartDelete);
                 mListener = listener;
 
-                mImegeViewDelete.setOnClickListener(this);
+                mImageViewDelete.setOnClickListener(this);
             }
 
             @Override
