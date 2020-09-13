@@ -117,8 +117,9 @@ public class RadarChartInsertLabelActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.btnRadarChartAddLabel:
-                    if (etRadarChartLabel.getText() != null) {
-                        mRadarChartLabelRows.add(etRadarChartLabel.getText().toString());
+                    String label = etRadarChartLabel.getText().toString();
+                    if (label.compareTo("") != 0) {
+                        mRadarChartLabelRows.add(label);
                         mRadarChartAdapter.notifyDataSetChanged();
                         etRadarChartLabel.setText("");
                     }
