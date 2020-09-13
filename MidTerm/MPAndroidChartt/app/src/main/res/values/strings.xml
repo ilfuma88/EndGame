@@ -58,6 +58,8 @@
     <string name="text_tvPopupMain">"The app shows some examples of charts created using MPAndroidChart library."</string>
     <string name="text_tvPopupMain_insert_data_lineChart">"Here you can insert your data to realize your LineChart. Insert an hour of the day with relative temperature, and then click "Add Data" button! This is only a simple demo, so it's permitted to insert only an hour greater than the previous one!"</string>
     <string name="text_tvPopupLineChartInfo">"This is the Line Chart realized with you data. The chart shows the temperature trend of a day!"</string>
-
+    <string name="text_tvPopup_insert_label_radarChart">Here you can enter the axis labels. A value must then be entered for each label</string>
+    <string name="text_tvPopoup_insert_data_radarChart">Here has to be inserted a label for a data set and all the values for the labels.</string>
+    <string name="text_tvPopoup_radarChart">This is the Radar Chart created with your data!</string>
 </resources>
 

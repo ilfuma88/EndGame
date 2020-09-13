@@ -52,4 +52,7 @@
     <string name="text_tvPopupMain">L\'app mostra alcuni esempi di grafici creati usando la libreria MPAndroidChart</string>
     <string name="text_tvPopupMain_insert_data_lineChart">Qui puoi inserire i tuoi dati per realizzare il tuo Grafico a Linea. Inserisci un\'ora del giorno con la relativa temperatura, e poi clicca il bottone \"Aggiungi Dato\"! Questa è soltanto una semplice demo, così è permesso di inserire soltanto un\'ora maggiore di quella inserita precedentemente!</string>
     <string name="text_tvPopupLineChartInfo">Questo è il Grafico a Linea realizzato con i tuoi dati. Il grafico mostra l\'andamento della temperatura di un giorno!</string>
+    <string name="text_tvPopup_insert_label_radarChart">Qui puoi inserire l\' etichette degli assi. In seguito per ogni etichetta dovrà essere inserito un valore</string>
+    <string name="text_tvPopoup_insert_data_radarChart">Qui va inserita un etichetta per un set di dati e tutti i valori delle etichette.</string>
+    <string name="text_tvPopoup_radarChart">Questo è il radar chart creato i tuoi dati!</string>
 </resources>

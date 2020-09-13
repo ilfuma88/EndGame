@@ -2,22 +2,32 @@ package it.flaviamagnoni.mpandroidchart_t.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,9 +37,11 @@ import it.flaviamagnoni.mpandroidchart_t.R;
 
 public class RadarChartInsertDataActivity extends AppCompatActivity {
 
+    private Holder holder;
     private Intent intent;
     private Bundle bundle;
     private ArrayList<RadarChartRow> RowItem;
+    private int cntMnuAppInfo = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +50,39 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
         RowItem = new ArrayList<>();
         intent = getIntent();
         bundle = new Bundle(intent.getBundleExtra("bundle"));
-        new Holder();
+        holder = new Holder(this);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mnuAboutUs:
+                Intent intentAboutUs = new Intent(RadarChartInsertDataActivity.this, AboutUsActivity.class);
+                startActivity(intentAboutUs);
+                return true;
+            case R.id.mnuAppInfo:
+                if (cntMnuAppInfo == 0) {
+                    holder.showPopupWindow(R.id.mnuAppInfo);
+                    cntMnuAppInfo += 1;
+                }
+                return true;
+            case R.id.mnuGithub:
+                Intent intentGithub = new Intent(Intent.ACTION_VIEW);
+                intentGithub.setData(Uri.parse("https://github.com/PhilJay/MPAndroidChart"));
+                startActivity(intentGithub);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     public class Holder implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
         private EditText etRadarChartDataLabel;
         private Button btnRadarChartCreate, btnAddNewDataRadarChart;
@@ -48,11 +91,24 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
         private RecyclerView rvRadarChartInsertData;
         private RadarChartInsertDataActivity.Adapter mRadarChartAdapter;
         private RecyclerView.LayoutManager mRadarChartLayoutManager;
-        Holder(){
+
+        private Context mContext;
+
+        private PopupWindow mPopupWindow;
+        private TextView tvPopupMain;
+        private ImageButton ibtnClosePopup;
+
+        private ConstraintLayout clRcInsertData;
+
+        Holder(Context context){
             for (int i = 0;i<bundle.getStringArrayList("label").size();i++){
                 RowItem.add(new RadarChartRow(bundle.getStringArrayList("label").get(i),0));}
 
             Integer colors[] = {R.color.col_1_chart,R.color.col_2_chart,R.color.col_3_chart,R.color.col_4_chart,R.color.col_5_chart,R.color.col_6_chart,R.color.col_7_chart,R.color.col_8_chart,R.color.col_9_chart,R.color.col_10_chart};
+
+            mContext=context;
+
+            clRcInsertData = findViewById(R.id.clRcInsertData);
 
             rvRadarChartInsertData = findViewById(R.id.rvRadarChartInsertData);
             rvRadarChartInsertData.setHasFixedSize(true);
@@ -74,6 +130,31 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
             spinnerColors.setOnItemSelectedListener(this);
         }
 
+        public void showPopupWindow(int id) {
+            switch (id) {
+                case R.id.mnuAppInfo:
+                    btnRadarChartCreate.setEnabled(false);
+                    btnAddNewDataRadarChart.setEnabled(false);
+                    LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);  // Inizializzo una nuova istanza del LayoutInflater service
+                    View popupAppInfo = inflater.inflate(R.layout.popup_mnu_app_info, null);    // Gonfio (inflate) il layout "popup_mnu_app_info" all'interno della View popupAppInfo
+
+                    mPopupWindow = new PopupWindow(popupAppInfo, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);   // Inizializzo una nuova istanza di una finestra popup
+
+                    // Imposto un valore di elevation per la finestra di popup (per API >= 21)
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        mPopupWindow.setElevation(5.0f);
+                    }
+
+                    mPopupWindow.showAtLocation(clRcInsertData, Gravity.CENTER, 0, 0);  // Visualizza la finestra di popup al centro del ConstraintLayout del root
+
+                    ibtnClosePopup = popupAppInfo.findViewById(R.id.ibtnClosePopup);
+                    ibtnClosePopup.setOnClickListener(this);
+                    tvPopupMain = popupAppInfo.findViewById(R.id.tvPopupMain);
+                    tvPopupMain.setText(R.string.text_tvPopoup_insert_data_radarChart);
+                    break;
+            }
+        }
+
         @Override
         public void onClick(View view) {
             String labelData = etRadarChartDataLabel.getText().toString();
@@ -87,6 +168,7 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     break;
+
                 case R.id.btnRadarChartCreate:
                     if (labelData != ""){
                         InserBundle(labelData);
@@ -94,6 +176,13 @@ public class RadarChartInsertDataActivity extends AppCompatActivity {
                         intent.putExtra("bundle", bundle);
                         startActivity(intent);
                     }
+                    break;
+
+                case R.id.ibtnClosePopup:
+                    mPopupWindow.dismiss(); // Chiudo la finestra di popup
+                    btnRadarChartCreate.setEnabled(true);
+                    btnAddNewDataRadarChart.setEnabled(true);
+                    cntMnuAppInfo = 0;
                     break;
             }
         }
